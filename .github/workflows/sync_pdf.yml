@@ -1,0 +1,21 @@
+name: Sync PDF from Overleaf
+
+on: 
+  workflow_dispatch:  # This allows you to manually trigger the workflow
+  schedule:
+    - cron: '0 0 * * *'  # This runs the workflow every day at midnight UTC
+
+jobs:
+  sync-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download PDF from Overleaf
+      run: |
+        wget -O main.pdf "https://www.overleaf.com/project/{66a80ee2dbb6fb436b1c26fa}/output/output.pdf?compileGroup=standard&clsMode=cls"
+        git add main.pdf
+        git commit -m "Update PDF from Overleaf"
+        git push
