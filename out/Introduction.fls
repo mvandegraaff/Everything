@@ -1,0 +1,8 @@
+PWD z:\home\Vandy\Latex\EverythingTwo
+INPUT C:\Users\micha\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT z:\home\Vandy\Latex\EverythingTwo\Chapters\intro\Introduction.tex
+OUTPUT z:\home\Vandy\Latex\EverythingTwo\out\Introduction.log
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\subfiles\subfiles.cls
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\subfiles\subfiles.cls
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\import\import.sty
+INPUT C:\Users\micha\AppData\Local\Programs\MiKTeX\tex\latex\import\import.sty

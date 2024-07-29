@@ -1,0 +1,273 @@
+\documentclass[../../main.tex]{subfiles} % Use the main document's preamble
+
+\begin{document}
+
+\chapter{Optics1}
+\section{summary}
+\subsection{Diffraction}
+One form of the Kirchhoff integral is (Eq. 8.3.7 Born and Wolf, 1999)
+\begin{equation} \label{eq. Kirchhoff diffracton integral}
+    U(P)=\frac{1}{4\pi}\oint_S\left[U\frac{\partial}{\partial n}\left(\frac{e^{iks}}{s}\right)-\frac{e^{iks}}{s}\frac{\partial U}{\partial n}\right]dS
+\end{equation}
+This is an approximate solutions to the Helmholtz equation
+\begin{equation}
+    \nabla^2U+k^2U=0
+\end{equation}
+Sections 8.2-8.3, and particularly figures 8.1 through 8.5 of Born and Wolf (1999) are very helpful in understanding the Kirchhoff integral. a simplification for source and observations points far from the aperture is (Eq. 8.3.17)
+\begin{equation} 
+    U(P)=-\frac{iA}{2\lambda}\int_{\mathcal{W}}\frac{e^{ik(r_0+s)}}{r_0s}[1-\cos(\chi)]dS
+\end{equation}
+A further simplification is (Eq. 8.3.18) for a point source, another clever geometric argument is made to show that the above integral is equal to
+\begin{equation} 
+    U(P)=-\frac{iA}{2\lambda}\int_{\mathcal{W}}\frac{e^{ik(r_0+s)}}{r_0s}[1-\cos(\chi)]dS
+\end{equation}
+where $\chi-(r_0,s)$ is $\pi$ minus the (nearly straight) angle at a point $Q$ on the portion of a spherical surface $\mathcal{W}$  centered at the source $P_0$ and filling the aperture, which some edge bits we neglect. See Figure 8.4 of Born and Wolf, which is helpful.the amplitude factor $K(\chi)$ is given by 
+\begin{equation} 
+    K(\chi)=-\frac{i}{2\lambda}[1+\cos(\chi)]
+\end{equation}
+
+Furthur reduction permits 
+\begin{equation} \label{eq. Kirchoff integral Fresnel Fraunhofer form}
+    U(P)\approx-\frac{iA}{\lambda}\frac{\cos\delta e^{ik(r'+s')}}{r's'}\int_{\mathcal{A}}e^{-ikf(\xi,\eta)}d\xi d\eta.
+\end{equation}
+where
+\begin{equation} \label{eq. Fresnel phase function}
+    f(\xi,\eta)=-\frac{x_0\xi+y_0\eta}{r'}-\frac{x\xi+y\eta}{s'}+\frac{\xi^2+\eta^2}{2r'}+\frac{\xi^2+\eta^2}{2s'}+\frac{(x_0\xi+y_0\eta)^2}{2r'^3}-\frac{(x\xi+y\eta)^2}{2s'^3}+\cdots.
+\end{equation}
+When the quadratic and higher terms in \ref{eq. Fresnel phase function} may be neglected, we have Fraunhofer diffraction, when they cannot we have Fresnel diffraction. 
+
+\section{Beam Shaping}
+This section is from ``Laser Beam Shaping: Theory and Techniques'' by Fred M. Dickey and Scott C. Holswade (2014). I have paraphrased and editted it down for my own study purposes. This is not my original work.
+
+In analogy with the Reynolds number in fluid dynamics, the Fresnel beta number is a dimensionless parameter that describes the relative importance of diffraction effects to the effects of geometric optics. The Fresnel beta number is defined as
+\begin{equation}
+    \beta=\frac{2\pi RD}{\lambda f}
+\end{equation}
+where $R$ is the characteristic length scale of input beam, $D$ is the characteristic length scale of the output beam, $\lambda$ is the wavelength of the light, and $f$ is propagation distance (suggestively given as the focal length of a lens). The Fresnel number is a measure of the relative importance of diffraction effects to the effects of geometric optics. When $F\ll 1$ the beam is said to be in the Fresnel regime, and when $F\gg 1$ the beam is said to be in the Fraunhofer regime.
+
+We choose to expres out irradiance distribution in dimensionaless forms using lowercase letters for input functions, e.g. $g(x/R,y/R)$ and uppercase for output functions, e.g. $G(x/D,y/D)$. When $\beta$ is large, geometric optics is a good approximation and the irradiance distribution is given by the Fourier transform of the input irradiance distribution. When $\beta$ is small, diffraction effects are important. Generally speaking, our beam shaping task will be easier with large $\beta$ and more difficult with small $\beta$. In the geometrical limit, we can reshape to any output we want, while this may become impossible for small $\beta$. 
+
+The continuity of the a beam shaping lens is also relevant,smooth lens allow good beam shaping, while discontinuities in the lens (as in a Fresnel lens) will require a much larger $\beta$ to achieve the same beam shaping.
+
+\subsection{Fourier Theory}
+The Fourier transform of a function $f(x)$ is defined as
+\begin{equation}
+    F(k)=T[f(x)]=\int_{-\infty}^\infty f(x)e^{-ikx}dx
+\end{equation}
+and the inverse Fourier transform is
+\begin{equation}
+    f(x)=T^{-1}[F(k)]=\frac{1}{2\pi}\int_{-\infty}^\infty F(k)e^{ikx}dk
+\end{equation}
+The Fourier transform of a function $f(x,y)$ is defined as
+
+\begin{equation}\label{eq. Fourier transform 2D}
+    F(k_x,k_y)=T[f(x,y)]=\int_{-\infty}^\infty\int_{-\infty}^\infty f(x,y)e^{-i(k_xx+k_yy)}dxdy
+\end{equation}
+and the inverse Fourier transform is
+\begin{equation}
+    f(x,y)=T^{-1}[F(k_x,k_y)]=\frac{1}{(2\pi)^2}\int_{-\infty}^\infty\int_{-\infty}^\infty F(k_x,k_y)e^{i(k_xx+k_yy)}dk_xdk_y
+\end{equation}
+
+\paragraph{Parseval's Theorem}
+\begin{equation}
+    2\pi \int_{-\infty}^\infty |f(x)|^2dx=\int_{-\infty}^\infty |F(k)|^2dk
+\end{equation}
+and in two dimensions we have 
+\begin{equation}
+    (2\pi)^2 \int_{-\infty}^\infty\int_{-\infty}^\infty |f(x,y)|^2dxdy=\int_{-\infty}^\infty\int_{-\infty}^\infty |F(k_x,k_y)|^2dk_xdk_y
+\end{equation}
+
+\paragraph{Convolution Theorem}
+Skipping directly to the two dimensional case, the convolution theorem states that if $F(k_x,k_y)$ is the Fourier transform of $f(x,y)$ and $G(k_x,k_y)$ is the Fourier transform of $g(x,y)$ then the Fourier transform of the convolution of $f$ and $g$ is given by the product of the Fourier transforms of $f$ and $g$:
+\begin{equation}
+    T[\{f(x,y)*g(x,y)\}]=F(k_x,k_y)G(k_x,k_y)
+\end{equation}
+or, in terms of the convolution integral explicitly, we have
+\begin{equation}
+    T^{-1}[F(k_x,k_y)G(k_x,k_y)]=\int_\infty^\infty f(x,y)g(x'-x,y'-y)dx'dy'
+\end{equation}
+where to keep the reader on their toes, we have flipped the sides and applied the inverse Fourier transform to both sides.
+
+\paragraph{Transforms of derivatives}
+The Fourier transform of the derivative of a function is given by
+\begin{equation}
+    T\left[\frac{\partial f}{\partial x}\right]=ik_xF(k_x,k_y)
+\end{equation}
+
+\paragraph{Cauchy-Schwarz Inequality}
+While not technically a theorem of Fourier analysis, the Cauchy-Schwarz inequality is useful in the context of Fourier transforms. It states that for any two functions $f(x)$ and $g(x)$
+\begin{equation}
+    \left|\int_{-\infty}^\infty f(x)g^*(x)dx\right|^2\leq\int_{-\infty}^\infty |f(x)|^2dx\int_{-\infty}^\infty |g(x)|^2dx
+\end{equation}
+where $g^*$ is the complex conjugate of $g$. 
+
+\subsection{Uncertainty principle and Space-Bandwidth Product}
+We shall see in later sections that the space-bandwidth product is related to the $\beta$ paremeter. We shall use the uncertainty principle to prove that for small $\beta$ it is not possible to reshape a beam to an arbitrary shape.
+
+Of course the Heisenberg uncertainty principle is a statement about the uncertainty in the position and momentum of a particle. it states
+\begin{equation}
+    \Delta x\Delta p\geq \frac{\hbar}{2}
+\end{equation}
+where $\Delta x$ is the uncertainty in the position of the particle and $\Delta p$ is the uncertainty in the momentum of the particle. By uncertainty we mean the standard deviation of the probability distribution of the position and momentum. Let us define the uncertainty in $f(x)$ and $F(k)$ as
+\begin{equation}
+    \Delta_f=\sqrt{\frac{\int_{-\infty}^\infty x^2|f(x)|^2dx}{\int_{-\infty}^\infty |f(x)|^2dx}}
+\end{equation}
+and for $\Delta_F$ we simply replace $x$ with $k$. Defining the space-bandywidth produce 
+\begin{equation}
+    SBP=\Delta_f\Delta_F
+\end{equation}
+we shall state the uncertainty principle in terms of the space-bandwidth product as 
+\begin{equation}
+    SBP\geq \frac{1}{2}
+\end{equation}
+See Eq (2.22) through (2.28) of Dickey and Holswade for the proof. It is a simple application of the Cauchy-Schwarz inequality. It may also be good to note the (perhaps intuitively obvious fct) that rescaling of $f(x)\to af(bx)$  does not change the space-bandwidth product.
+
+\paragraph{Gaussian's minimize the space-bandwidth product} 
+We only have $SBP=1/2$ for a (real) Gaussian function $f(x)=Ae^{-\alpha x^2}$ $\alpha \in \mathbb{R}$. See Lemma 2 in 2.2.2 of Dickey and Holswade for the proof.
+
+\paragraph{Theorem of minimization} 
+The fnction $q(x)$ which minimizes the space-bandwidth product for a given $f(x)e^{iq(x)}$ is the one which makes the phase of $f(x)e^{iq(x)}$ constant. See Theorem 11 in 2.2.2 of Dickey and Holswade for the proof.
+
+In two dimensions uncertainty is defined as 
+\begin{equation}
+    \Delta_f=\sqrt{\frac{\int_{-\infty}^\infty (x^2+y^2)|f(x,y)|^2dxdy}{\int_{-\infty}^\infty |f(x,y)|^2dxdy}}
+\end{equation}
+and similarly for $\Delta_F$. The space-bandwidth product is bounded below by unity
+\begin{equation}
+    SBP\geq 1
+\end{equation}
+
+\subsection{Cylindrical symmetry and Hankel transforms}
+Let's provide some results about cylindrical symmetry and Hankel transforms. A handy identity from the theory of Bessel functions is the identity 
+\begin{equation}
+    J_k(r)=\frac{1}{2\pi}\int_{-\pi}^\pi e^{i(r\cos\theta-k\theta)}d\theta
+\end{equation}
+which looks suspiciously similar to the integral representation of the Bessel functions given at and around Eq. 9.1.21 of Abramowitz and Stegun, though not quite the same. 
+
+Suppose we instead use polar coordinates $$(x,y)=(r\cos\theta,r\sin\theta)$$ $$(k_x,k_y)=(\alpha\cos\phi,\alpha\sin\phi)$$
+then Eq. \ref{eq. Fourier transform 2D} becomes
+\begin{equation}
+    F(\alpha,\phi)=\int_0^\infty\int_{-\pi}^{\pi}f(r,\theta)e^{-i\alpha r\cos(\theta-\phi)}rdrd\theta
+\end{equation}
+and supposeing that $f(r,\theta)$ is cylindrically symmetric, i.e. $f(r,\theta)=f(r)$, then we have
+\begin{equation}
+    F(\alpha,\phi)=\int_0^\infty\int_{-\pi}^{\pi}f(r)e^{-i\alpha r\cos(\theta)}rdrd\theta
+\end{equation}
+and using the identity above we have
+\begin{equation}
+    F(\alpha)=2\pi\int_0^\infty f(r)J_0(\alpha r)rdr
+\end{equation}
+The function $F(\alpha)$ is called the Hankel transform of $f(r)$. The inverse Hankel transform is given by
+\begin{equation}
+    f(r)=\int_0^\infty F(\alpha)J_0(\alpha r)\alpha d\alpha
+\end{equation}
+
+\section{Stationary Phase}
+The method of stationary phase is an approximation method for evaluating integrals with rapidly oscillating integrands. The method is based on the observation that the integral of a rapidly oscillating function is dominated by the contributions from the stationary points of the phase of the integrand.. It is relevant in the theory of dispersice wave propagation where it motivates the concept of groupvelocite and it ay be used to derive the geometrrical optics limit from Fresnel diffraction theory and to provide bounds for when geometrical optics are valid.
+
+Suppose we have an integral of the form
+\begin{equation}
+    H(\gamma)=\int_{-\infty}^\infty f(\xi)e^{i\gamma q(\xi)}d\xi
+\end{equation}
+Because the integral will be dominated by locations where the phasevaries slowly or not at all we may approximate the integral by expanding the phase about the stationary points of the phase. We may expand the phase about the stationary points as
+\begin{equation}
+    H(\gamma)\approx f(\xi_0)e^{i\gamma q(\xi_0)} \int_{-\infty}^\infty e^{i\gamma\frac{q''(\xi_0)}{2}(\xi-\xi_0)^2}d\xi
+\end{equation}
+where $\xi_0$ is the stationary point of the phase, i.e. $q'(\xi_0)=0$. The integral is a Gaussian integral and may be evaluated exactly. The result is
+\begin{equation}
+    H(\gamma)\approx f(\xi_0)e^{i\mu\pi/4}e^{i\gamma q(\xi_0)} \sqrt{\frac{2\pi}{\gamma|q''(\xi_0)|}}
+\end{equation}
+Where
+\begin{equation}
+    \mu=\sgn\left(\frac{d^2q}{d\xi^2}\bigg|_{\xi_0}\right)
+\end{equation}
+is the Maslov index. The Maslov index is a topological invariant of the phase function $q(\xi)$ and is equal to the number of times the phase function winds around the origin as $\xi$ is varied from $-\infty$ to $\infty$. The Maslov index is also equal to the number of stationary points of the phase function.(githp copilot wrote that idk what it is its not mentioned at that spot in Dickey and Holswade, its related to the absolute value in the quare root, it's also on wikipedia, i'm gonna roll with it)
+
+\subsection{convergence of the stationary phase approximation}
+We shall see that using the loewest order term only in the stationary phase approximation give the geomteric optics approximation. In this case, $\beta$ will serve as the large parameter in the phase o fht integrand. While it is not important for our purposes to have exact expressions for the higher order terms, it is important to know when the approximation is valid. Before our somewhat technicl discussion, lets sumarize what will be our main results. In the cotent of beam shaping will will have another parameters in our phase functions so our integrals will be of the form
+\begin{equation}
+    H(x,\gamma)=\int_{-\infty}^\infty f(\xi)e^{i\gamma q(\xi,x)}d\xi
+\end{equation}
+where $\xi$ is a point on the aperture and $x$ is a point at the focal plane. The function $q(\xi,x)$ will be proportional to the travel time from $\xi$ to $x$. While both $\xi$ and $x$ will be 2D vectors we use the one dimensional case to simlif the discussion. 
+
+We will show that if the function $q(\xi,x)$ and $f(\xi)$ are analytic at the stationary point $\xi_0$ and the second derivative  $\partial^2q(\xi,x)/\partial \xi^2$ is nonzero at $\xi_0$ then the next order correction dies down like $1/\gamma^{3/2}$. This give the expansion of the form
+\begin{equation}
+    H(x,\gamma)=\frac{A(x)}{\gamma^{1/2}}+\frac{B(x)}{\gamma^{3/2}}+\cdots
+\end{equation}
+And the relative error between the first order term and the exact integral is of order $1/\gamma$. If $f(\xi)$ is real, then the functions $A$ and $B$ will have the same phase and the error of $|H(x,\gamma)|^2$ is $\mathcal{O}(1/\gamma^2)$.
+
+The discussio proceeds with les well behaved functions resulting in slower convergence and such. i might get back to it later. skippnig the reset of 2.3. 
+\section{Maxwell's equations}
+thi si ssection 2.4 of Dickey and Holswade. I'm not gonna write it all out. they indroduce the wave equation here. 
+
+\section{Geometrical optics}
+I will skip section 2.5.1 about fermats principle for now, but it is important. Several examples are given in the text which may be helpful. 
+\subsection{The eikonal equation}
+The laws of geometrical optics may be derived as a high-frequency approximations to the solutions of Maxwell's equations (ME). Before considering that limit, lets consider the high-frequency limit of the scalar wave equation, supposing whe have a solution $p(\mathbf{x},\omega)$ to
+\begin{equation}\label{eq. scalar wave equation}
+    \nabla^2p-\frac{\omega^2}{c(\mathbf{x})^2}p=0
+\end{equation}
+This is the time-harmonic wave equation also known as the reduced wave equation. we are interesting in the behavior for large $\omega$, and in particular for olutions from  point source. The theory ofGreen's functions tells us that the general high-frequency limit (not just for point sources!) can be built by integrating over many such point sources. For constant velocity (of what?) the point source solutions may be written as
+\begin{equation}
+    p(\mathbf{x},\omega)=A\frac{e^{i\omega r/c}}{r}
+\end{equation}
+This solution has a radipldy varying phase and slowly varying amplitude (that is independent of $\omega$). In the case of variable $c(\mathbf{x})$ we assume that while the amplitde may not be completely independent of $\omega$, it is at least slowly varying. We may then write the solution as
+\begin{equation}
+    p(\mathbf{x},\omega)=A(\mathbf{x})e^{i\omega \phi(\mathbf{x})}
+\end{equation}
+this is only the first term in an asymptotic expansion in powers of $1/\omega$. The genera solution must include corredtion to the amplitude from the $\omega$ dependence.
+\begin{equation}
+    \nabla p=i\left(\nabla A+A i\omega \nabla\phi\right)e^{i\omega\phi}
+\end{equation}
+and 
+\begin{equation}
+    \nabla^2 p = i\left(\nabla^2 A+2i\omega\nabla A\cdot\nabla\phi+i\omega A\nabla^2\phi-A\omega^2(\nabla\phi)^2\right)e^{i\omega\phi}
+\end{equation}
+Substitution into Eq. \ref{eq. scalar wave equation} gives
+\begin{equation}\label{eq. eikonal equation}
+    \nabla\phi|^2=1/c(\mathbf{x})^2
+\end{equation}
+This is the eikonal equation. The next term in the asymptotic expansion is the transport equation (claims AI) and is given by
+\begin{equation}
+    2\nabla A\cdot\nabla\phi+A\nabla^2\phi=\nabla\cdot(A^2\nabla\phi)
+\end{equation}
+The divergence form suggests that $A^2\nabla\phi$ is a is a flux of some conserved quantity. this will turn out to be the energy flux. 
+
+We mentioned that the gneral high-frequency approximation may be built from many point sources. If the field emenatess from two point sources the HF limit of the wave field looks like
+\begin{equation}
+    p(\mathbf{x},\omega)=A_1(\mathbf{x})e^{i\omega \phi_1(\mathbf{x})}+A_2(\mathbf{x})e^{i\omega \phi_2(\mathbf{x})}
+\end{equation}
+Even in the case of a single point source, there maybe be locations wherehte HF limit consists of several terms from the same source, corresponding to diferent ray from the source to that point. the surfaces which separate the regions of space where the HF limit consists of different terms from the same source are called caustics or caustic surfaces.
+
+\subsection{The eikonal equation and Maxwell's equations}
+In the last section we derived the eikonal equation as the high-frequency limit of the scalar wave equation. We now consider the high-frequency limit of Maxwell's equations. We will see that the eikonal equation is the high-frequency limit of the wave equation for the electric field. this is natural considering that each component of the electric field satisfies the wave equation. I will skip several steps here. We assume a solutions to the wave equation of the form
+\begin{equation}
+    \mathbf{E}(\mathbf{x},\omega)=\mathbf{E_0}(\mathbf{x})e^{i\omega\phi(\mathbf{x})}
+\end{equation}
+and we shall arrive at the result 
+\begin{equation}
+    \mathbf{E_0}\left( \frac{1}{c(\mathbf{x})^2} -\nabla\phi\cdot\nabla\phi\right)=0
+\end{equation}
+where the speed of light is given by
+\begin{equation}
+    c(\mathbf{x})^=\frac{c_0^2}{\mu\epsilon}
+\end{equation}
+which is the eikonal equation. The energy flux is given by the Poynting vector
+\begin{equation}
+    \mathbf{S}=\frac{1}{2}\mathbf{E}\times\mathbf{H}
+\end{equation}
+where $\mu(\mathbf{x})\mathbf{H}=\mathbf{B}$. Using that $\mathbf{E}$ and $\mathbf{H}$ are orthogonal to each other and also to $\mathbf{\phi}$ we can conclude that the Poynting vector is in the direction of the gradient of the phase.
+
+I will skip all of sections 2.5.4, 2.5.5, ad 2.5.6 of Dickey and Holswade for now. they cover the development of geometrical optics and fermat's princible with and without reflections. 
+\section{Fourier Optics 1}
+\subsection{Fresnel diffraction introduction}
+The Fresnel approximation is cocenerd with the wave field for $z>0$ when an incoming wave field is incident on a planar aperture at $z=0$. The approach can be outlined n three steps:
+\begin{enumerate}
+    \item Write down an exact expression for the wave field at $z>0$ in terms of the wave field at the aperture.
+    \item Use a paraxial approximation to simplify the exact expression assuming the observation point is close to the optical axis.
+    \item Compute the wave feld aware from the apertre using the first two steps with under the following assumption: that at the aperture the field is equal to the undistred field of the incoming way (modified by any optical element inside the aperture) and that the field is zero outside the aperture.
+\end{enumerate}
+The first step is rogorous, the second step straightforward to justify. The third step is the hardest to justify, but is plausible provided the aperture is large compared to the wavelength.
+
+
+\end{document}

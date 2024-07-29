@@ -1,0 +1,220 @@
+\documentclass[../../main.tex]{subfiles} % Use the main document's preamble
+
+\begin{document}
+
+\chapter{Optics2}
+\section{Fourier optics Born and Wolf chapter 8 }
+the text i was following by Dickey and Holswade is not as thorough. I will switch to Born and Wolf chapter 8, which is likely to be far more thorough than i need, but is the seminal text. I am using the seventh edition, printed in 1999.
+\subsection{The Huygens-Fresnel principle}
+From section 8.2 of Born and Wolf. Let us consider a spherial wavefront $S$ proceeding from a point source $P_0$ and let $Q$ be a point on $S$, and let our observation point be $P$. (Figure 8.1 of Born and Wolf is helpful here). The field at $Q$ ($r_0$ from $P_0$) is $A e^{ikr_0}/r_0$ where $A$ is the amplitude of the field at a distance of unity. The contribution fom the element of the wavefront $dS$ at $Q$ to the field at $P$ is denoted $dU(P)$ and is given by
+\begin{equation}
+    \frac{Ae^{ikr_0}}{r_0}K(\chi)\frac{e^{iks}}{s}dS
+\end{equation}
+where $s$ is the distance from $Q$ to $P$ and $K(\chi)$ is the obliquity or inclination factor and $\chi$ is the angle of diffraction. $K(\chi)$ describes the reduction in amplitude due to the fact that the wavefront is not normal to the line $QP$. Following Fresnel, we shall assume that $K(\chi)$ is given by a function which is maximal for $\chi=0$ and decreases monotonically as $\chi$ increases until it is zero at $\chi=\pi/2$. One obvious choice is 
+\begin{equation}
+    K(\chi)=\cos\chi
+\end{equation}
+however, Born and Wolf do not actually choose a functional form for $K$ at this time. We also assume, following Fresnel, that only those portion $S'$ visible from $P$ contributes to the field at $P$ as there may be obstacles. The field at $P$ is then given by integrating over $S$
+\begin{equation}\label{eq. Huygens-Fresnel integral}
+    U(P)=\frac{Ae^{ikr_0}}{r_0}\int_{S'}K(\chi)\frac{e^{iks}}{s}dS
+\end{equation}
+This seems to be the core idea of the Huygens-Fresnel principle. The evalutation of Eq. \ref{eq. Huygens-Fresnel integral} is not trivial. To proceed we shall follow the \textit{zone construction} of Fresnel. This is done by constructing spheres centered at $P$ (not the source $P_0$) with radii $$b,\quad b+\frac{\lambda}{2},\quad b+\frac{2\lambda}{2},\quad \cdots,\quad b+\frac{j\lambda}{2},\quad\cdots$$ where $b$ is the distance from $P$ to the nearest point on $S$ and $j$ is an integer. In other words, if $C$ is the point intersection of $S$ and $P_0P$, then $b=CP$. These spheres divide $S$ into zome $Z_j$.
+
+We assume that bot $r_0$ and $b$ are large compared to $\lambda$. This mean that within a particular zone the value of the inclination factor $K(\chi)$ is approximately constant. We may then write the contribution of the $j$th sone to $U(P)$ as
+\begin{equation}
+    U_j(P)=2\pi\frac{Ae^{ikr_0}}{r_0+b}K_j\int_{b+(j-1)\lambda/2}^{b+j\lambda/2}e^{iks}ds
+\end{equation}
+where we've done some variable algebra and a change of integration variable. The integral is easily evaluated and we have
+\begin{equation}
+    U_j(P)=\frac{2\pi A}{ik}\frac{e^{ik(r_0+b)}}{r_0+b}K_j e^{ik\lambda/2} \left(1-e^{-ik\lambda/2}\right)
+\end{equation}
+but since $k\lambda=2\pi$ the last two factors become $2(-1)^j$. 
+\begin{equation}\label{eq. Fresnel zone contribution}
+    U_j(P)=2i\lambda\frac{e^{ik(r_0+b)}}{r_0+b}K_j (-1)^{j+1}
+\end{equation}
+
+The total field at $P$ is then given by summing over all zones
+\begin{equation}\label{eq. Huygens-Fresnel integral 2}
+    U(P)=2i\lambda\frac{e^{ik(r_0+b)}}{r_0+b}\sum_{j=1}^n (-1)^{j+1}K_j
+\end{equation}
+Some clever math is done in Eqs. 8.2.5 to 8.2.9 of Born and Wolf to show that the sum may be written as
+\begin{equation}\label{eq. fresnel sone sum}
+    \begin{aligned}
+    \Sigma=\frac{K_1}{2}+\frac{K_n}{2} & \text{if $n$ is even}\\
+    \Sigma=\frac{K_1}{2}-\frac{K_n}{2} & \text{if $n$ is odd}
+    \end{aligned}
+\end{equation}
+The clever math means that Eq. \ref{eq. fresnel sone sum} is valid unless varius terms in the series switch sign enough to cause appreciable error. Ignoreing that situation, we have
+\begin{equation}
+    U(P)=i\lambda(K_1\pm K_n)\frac{e^{ik(r_0+b)}}{r_0+b}
+\end{equation}
+using Eq. \ref{eq. Huygens-Fresnel integral 2} we can express the sum as 
+\begin{equation}
+    U(P)=\tfrac12[U_1(P)+U_n(P)]
+\end{equation}
+but as we already mentioned, the last zone will have a vanishing contribution and so we have
+\begin{equation}\label{eq. Huygens-Fresnel integral 3}
+    U(P)=i\lambda K_1\frac{e^{ik(r_0+b)}}{r_0+b}=\tfrac12 U_1(P)
+\end{equation}
+demonstrating that the totae field at $P$ is equal to hlf the disturbance of the first zone, a non-obvious result. When further see that Eq. \ref{eq. Huygens-Fresnel integral 3} provides the correct expression for a spherical wave if we have $i\lambda K_1=1$ and hence that 
+\begin{equation}\label{eq. zone factor}
+    K_1=\frac{e^{-i\pi/2}}{\lambda}.
+\end{equation}
+(which i didn't expect). The quarter phase in Eq. \ref{eq. zone factor} may be accounted for by assuming that th seondary waves oscillate a quatryer of a period out of phase with the primary wave while the amplitude factor is accounted for by assuming that the secondary waves have an amplitude a factor of $\lambda$ smaller than the primary wave. We can thus conclude that with those assumptions the Huygens-Fresnelprinciple produces the correct expression for a spherical wave. However, these additional assumptions are not required and a better justification for the factor of Eq. \ref{eq. zone factor} is given in later secions. 
+
+Still following Fresnel, we can use Eq.\ref{eq. Fresnel zone contribution} to make predictions about the field produces when obstructions are present. Non trivial results are immediately apparent, such as if all but one half of the first zone is covered, the field at $P$ is the same as if no screen were present. If the screen covers all but the entire first zone, the field is twice as large (and so the intensity four ties larger) as if no screen were present.When only zone 1 and zone 2 are not covered, the field at $P$ is nearly zero since the terms of Eq. \ref{eq. Fresnel zone contribution} nearly cancel (since $K$ is slowly varying). Even the spot of Arago is predicted successfully Fresnel theory.
+
+\subsection{The Kirchhoff diffraction theory}
+From section 8.3 of Born and Wolf.
+\subsubsection{The Kirchhoff integral theorem}
+Kirchoff showd that the Huygens-Fresnel principle may be derived from an integral thorrem which expresses the solution of the homogeneous wave equation -at an arbitrary point-in terms of the values of the field and its first derivatis at all points on an arbitrary closed surface surrounding the point $P$. 
+
+We begin by considering a monochromatics scalar wave 
+\begin{equation}
+    V(x,y,z,t)=U(x,y,z)e^{-i\omega t}
+\end{equation}
+where the spatial part $U$ satisfies (in a vacuum) the time-independent wave equation
+\begin{equation}\label{eq. Helmholtz equation}
+    (\nabla^2+k^2)U=0
+\end{equation}
+where $k=\omega/c$ is the wave number. We shall assume that $U$ and its first and second order partial derivatives are continuous within a volume $v$ bounded by a closed surface $S$. We shall also assume that $U$ and its first- and second-order partial are continuous on and within this surface. If $U'$ is any other function satisfying the same conditions, then we may then apply Gauss's theorem to obtain 
+\begin{equation}
+    \int_v (U\nabla^2U'-U'\nabla^2U)dv=-\oint_S \left(U\frac{\partial U'}{\partial n} -U'\frac{\partial U}{\partial n}\right)dS
+\end{equation}
+where the differentiation is along the \textit{inward} normal to $S$ (which is the opposite of the normal typically used in Greens theorem). If $U'$ additionally obeys the Helmholtz equation then the left hand side of the above equation vanishes. Let us make the ansatz $U'(x,y,z)=e^{iks}/s$ where $s$ is the distance from the point $(x,y,z)$ to the point $P$ (the observation point). However, at the orgin $s=0$ and so we must exclude the origin from the volume $v$. Therefore we surround $P$ by a small sphere $S_0$ of radius $\epsilon$ and let the integration be over the volume bounded by $S$ and $S_0$. We then have
+\begin{equation}
+    \begin{aligned}
+    \oint_S\left[U\frac{\partial}{\partial n}\left(\frac{e^{iks}}{s}\right)-\frac{e^{iks}}{s}\frac{\partial U}{\partial n}\right]dS=&-\oint_{S'}\left[U\frac{e^{iks}}{{s}}\left(ik-\frac{1}{s}\right)-\frac{e^{iks}}{s}\frac{\partial U}{\partial n}\right]dS\\
+    =&-\oint_{\Omega}\left[U\frac{e^{ik\varepsilon}}{\varepsilon^2}\left(ik-\frac{1}{\varepsilon}\right)-\frac{e^{ik\varepsilon}}{\varepsilon}\frac{\partial U}{\partial s}\right]\varepsilon^2d\Omega
+    \end{aligned}
+\end{equation}
+The LHS does not depend on $\varepsilon$ and so we may take the limit $\varepsilon\to0$. The RHS is then equal to $4\pi U(P)$. We thus have
+\begin{equation} \label{eq. Kirchhoff integral theorem}
+    U(P)=\frac{1}{4\pi}\oint_S\left[U\frac{\partial}{\partial n}\left(\frac{e^{iks}}{s}\right)-\frac{e^{iks}}{s}\frac{\partial U}{\partial n}\right]dS
+\end{equation}
+This is the Kirchhoff integral theorem. It expresses the value of the field at $P$ in terms of the values of the field and its normal derivative on the surface $S$. Born and Wolf proceed to generalize to the case of non-monochromatic fields, but i shal skip that for now.
+
+\begin{aside}
+    Let's take a moment to compare this expression for the Kirchoff integral from Born and Wolf wth the treatment from Jackson (third edition, section 10.5)
+\end{aside}
+
+\subsubsection{Kirchoff's diffraction theory}
+(section 8.3.2 of Born and Wolf). While the integral theorem embidies the spirit of te Huygens-Fresnel principle, the laws governingthe contributions from the various elements of the surface $S$ are more complicated Fresnel assumed. Kirchoff showed, however that in many cases the theorem may be reduced ito an approximate bute simpler form which is esentially quivalent to the formulat of Fresnel, but which additionally provides an explicit expression for the amplitude factor $K(\chi)$, which remained undetermined in Fresnel's theory.
+
+Consider a monochromatic wave, from a source $P_0$propagated through an opening in a creen, and let $P$ be the point where the field is to be determined (Figure 8.3 of Born and Wolf). We shall assume that the opening is small compared to the distance from the source to the opening, that the opening is large compared to the wavelength, and that the opening is small compared to the distance from the opening to the observation point. 
+
+We choose our surface of inegration to be composed of three regions, the opening $\mathcal{A}$, a portion $\mathcal{B}$ of the dark side of the screen, and portion $\mathcal{C}$ of the surface of a sphere of radius $R$ centered at $P$. The surface integral is then over the closed surface formed by the union of $\mathcal{A}$, $\mathcal{B}$, and $\mathcal{C}$. 
+
+the difficulty is that to apply Kirchoff's integral theorem Eq. \ref{eq. Kirchhoff integral theorem} we must know the values of the field and its normal derivative on the surface. However, we never (or rarely) know the exact field or its derivatives on  $\mathcal{A}$, $\mathcal{B}$, or $\mathcal{C}$. However, we may make some assumptions. On $\mathcal{A}$ we assume that the field and its derivative is equal to those of the incoming wave (potentially modified by any optical element inside the aperture? similar to Dickey?), an assumption which should hold extremely well everywhere but in the immediate vicinity of the edge of the aperture. On $\mathcal{B}$ we assume that the field and its derivative is zero. 
+
+The situation for $\mathcal{C}$ is more complicated it would seem, but here we just straight up cheat and take advantage of the fact that the source has only been radiating for a finite amount of time.  then we simply make the radius of the sphere $R$ large enough that the field and its derivative are zero on $\mathcal{C}$ because of the finite speed of light. 
+
+Now, using the fact that 
+\begin{equation}\label{eq. spherical wave field and derivative components}
+    U^{(i)}=\frac{Ae^{ikr}}{r}, \quad \frac{\partial U^{(i)}}{\partial n}=\frac{Ae^{ikr}}{r}\left(ik-\frac{1}{r}\right)\cos(n,r)
+\end{equation}
+where $\cos(n,r)$ is the cosine of the angle angle between the normal to the surface and the radius vector from the source to the point on the surface, we may evaluate the integral in Eq. \ref{eq. Kirchhoff integral theorem} and neglect the terms $1/r$ and $1/s$ in the field derivatives to obtain
+\begin{equation} \label{eq. Kirchhoff integral theorem 2}
+    U(P)=-\frac{iA}{2\lambda}\int_{\mathcal{A}}\frac{e^{ik(r+s)}}{rs}[\cos(n,r)-\cos(n,s)]dS
+\end{equation}
+For a point source, another clever geometric argument is made to show that the above integral is equal to
+\begin{equation} \label{eq. Kirchhoff integral theorem 3}
+    U(P)=-\frac{iA}{2\lambda}\int_{\mathcal{W}}\frac{e^{ik(r_0+s)}}{r_0s}[1-\cos(\chi)]dS
+\end{equation}
+where $\chi-(r_0,s)$ is $\pi$ minus the (nearly straight) angle at a point $Q$ on the portion of a spherical surface $\mathcal{W}$  centered at the source $P_0$ and filling the aperture, which some edge bits we neglect. See Figure 8.4 of Born and Wolf, which is helpful.
+
+Comparison of Eq. \ref{eq. Kirchhoff integral theorem 3} with Eq. \ref{eq. Huygens-Fresnel integral} shows that the amplitude factor $K(\chi)$ is given by 
+\begin{equation} 
+    K(\chi)=-\frac{i}{2\lambda}[1+\cos(\chi)]
+\end{equation}
+which for $\chi=0$ gives the correct value of $K(\chi)$ from Fresnels theory, but does not vanish at $\chi=\pi/2$ as Fresnel assumed.
+
+Poincare showed that the assumed values of the field in the plane of the aperture are not reproduced by the Kirchhoff integral theorem. This is not suprising given the assumptions about the relative sizes of the aperture and the distance from the aperture to the observation point. However, the field in the plane of the aperture is not of interest in most cases. but i think we should be able to figure it out if we want to, i hope it is addressed.
+
+\subsection{Kirchoff theory: Fraunhofer and Fresnel diffraction}
+\subsubsection{Initial approximations}
+Let us return to the main version of the Fresnel-Kirchoff diffraction formula
+\begin{equation} \label{eq. Kirchhoff integral theorem 2 again}
+    U(P)=-\frac{iA}{2\lambda}\int_{\mathcal{A}}\frac{e^{ik(r+s)}}{rs}[\cos(n,r)-\cos(n,s)]dS
+\end{equation}
+and consider the integrand as the element $dS$ explores the domain of integration. It is clear that the quantities $r$ and $s$ will vary by many wavelengths assuming the aperture is large compared to the wavelength; therefore the phase factor will oscillate rapidly. in constrast the cosine terms will vary slowly. Given our assumptions about the aperture, we may then approximate the cosine terms by replacing them with $2\cos\delta$ where is the angle beteween $P_0P$ and the normal to the aperture. We may similarly replace $1/rs$ with $1/r's'$ where $r'$ and $s'$ are the distances from $P_0$ and $P$ to the aperture. We then have
+\begin{equation} \label{eq. Kirchhoff integral 4}
+    U(P)\approx-\frac{iA}{\lambda}\frac{\cos\delta}{r's'}\int_{\mathcal{A}}e^{ik(r+s)}dS.
+\end{equation}
+Our coordinate system places the origin within the aperture and the $x$ and $y$ axes in the plane of the aperture. Setting $(x_0,y_0,z_0)$ to be the coordinates of the source, $(x,y,z)$ to be the coordinates of the observation point, and $(\xi,\eta)$ to be the coordinates of the point on the aperture, we have
+\begin{equation} \label{eq. Fresnel coordinates}
+    \begin{aligned}
+    r^2&=(x_0-\xi)^2+(y_0-\eta)^2+z_0^2\\
+    s^2&=(x-\xi)^2+(y-\eta)^2+z^2\\
+    r'^2&=x_0^2+y_0^2+z_0^2\\
+    s'^2&=x^2+y^2+z^2
+    \end{aligned}
+\end{equation}
+Hence
+\begin{equation} \label{eq. Fresnel coordinate transformation}
+    \begin{aligned}
+    r^2&=r'^2-2x_0\xi-2y_0\eta+\si^2+\eta^2\\
+    s^2&=s'^2-2x\xi-2y\eta +\xi^2+\eta^2
+    \end{aligned}
+\end{equation}
+
+
+\subsubsection{The Fraunhofer and Fresnel approximations}
+Due to our assuptions of the aperture being small, we may expand both $r$ and $s$ in powers of $\xi/r'$ and $\eta/r'$ and $\xi/s'$ and $\eta/s'$ respectively up to second order. We then have 
+\begin{equation} \label{eq. Fresnel coordinate expansion}
+    \begin{aligned}
+    r\sim r'-\frac{x_0\xi+y_0\eta}{r'}+\frac{\xi^2+\eta^2}{2r'}-\frac{(x_0\xi+y_0\eta)^2}{2r'^3}+\cdots,\\
+    s\sim s'-\frac{x\xi+y\eta}{s'}+\frac{\xi^2+\eta^2}{2s'}-\frac{(x\xi+y\eta)^2}{2s'^3}+\cdots.
+    \end{aligned}
+\end{equation}
+We may rewrite \ref{eq. Kirchhoff integral 4} using \ref{eq. Fresnel coordinate expansion} in terms of a function $f(\xi,\eta)$ as
+\begin{equation} \label{eq. Kirchoff integral 5}
+    U(P)\approx-\frac{iA}{\lambda}\frac{\cos\delta e^{ik(r'+s')}}{r's'}\int_{\mathcal{A}}e^{-ikf(\xi,\eta)}d\xi d\eta.
+\end{equation}
+where
+\begin{equation} \label{eq. Fresnel f}
+    f(\xi,\eta)=-\frac{x_0\xi+y_0\eta}{r'}-\frac{x\xi+y\eta}{s'}+\frac{\xi^2+\eta^2}{2r'}+\frac{\xi^2+\eta^2}{2s'}+\frac{(x_0\xi+y_0\eta)^2}{2r'^3}-\frac{(x\xi+y\eta)^2}{2s'^3}+\cdots.
+\end{equation}
+let us define
+\begin{equation}
+    \begin{aligned}
+        l_0 &=-\frac{x_0}{r'},&\quad l&=\frac{x}{s'}\\
+          m_0&=-\frac{y_0}{r'},& \quad m&=\frac{y}{s'}
+    \end{aligned}
+\end{equation}
+Which the text describes $(l_0,m_0)$ and $(l,m)$ as the direction cosines of the rays from the source to the observation point and from the aperture to the observation point respectively. but i do not understand this. looking at the text, the $x$ cosine from $P_0$ would be $\xi/r'$ and the $x$ cosine from $P$ would be $\xi/s'$, but i do not see how that is the same as the above. let me think this through. letting $\theta_0$ be the angle between the ray from $OP_0$ where $O$ is the origin (in center of the aperture) and the $z$ axis (which is normal to the aperture), we have $l_0=\sin\theta_{0x}$. similarly, letting $\theta$ be the angle between the ray from $OP$ and the $z$ axis, we have $l=\sin\theta_x$. I've just been assuming $x_0=y_0=0$ and $x=y=0$ for some reason. but i still find it odd that they would identify these angles as sines of a small angle, rather than cosies of a large angle (which is what i would have done).
+
+With those comments, we may rewrite Eq. \ref{eq. Fresnel f} as
+
+\begin{multline}\label{eq. Fresnel f 2}
+    f(\xi,\eta)=(l_0-l)\xi+(m_0-m)\eta\\
+    +\frac{1}{2}\left[\left( \frac{1}{r'}-\frac{1}{s'}\right)(\xi^2+\eta^2)-\frac{(l_0\xi+m_0\eta)^2}{r'}-\frac{(l\xi+m\eta)^2}{s'}\right]\cdots.
+\end{multline}    
+Therefore one an identify the condition needed to neglect the higher order terms by checking if 
+\begin{equation}
+    \frac{k}{2}\left|\left( \frac{1}{r'}-\frac{1}{s'}\right)(\xi^2+\eta^2)-\frac{(l_0\xi+m_0\eta)^2}{r'}-\frac{(l\xi+m\eta)^2}{s'}\right|\ll2\pi
+\end{equation}
+which is satisfied when 
+\begin{equation}
+    |r'|\gg\frac{(\xi^2+\eta^2)_{max}}{\lambda}\quad \text{and} \quad |s'|\gg\frac{(\xi^2+\eta^2)_{max}}{\lambda}
+\end{equation}
+or if 
+\begin{equation}
+    l_0^2,m_0^2,l^2,m^2\ll\frac{|r'|\lambda}{(\xi^2+\eta^2)_{max}}
+\end{equation}
+
+\subsection{Fraunhofer diffraction}
+In this section we cover the second half of section 8.3.3 of Born and Wolf. As a reminder, we are still considering point sources and our starting integral is Eq. \ref{eq. Kirchoff integral 5}, which one can see explicitly has pherical wavefronts. There is a lengthy discussion belw Eq 8.3.34 which i will skip for now, partially because i do not understand it. i kinda feel called out by github copilot for writing that last sentence for me. 
+
+In the Fraunhofer approximation, the four quantities $l_0,m_0,l,m$ are all small enough that we drop the quadratic terms in Eq. \ref{eq. Fresnel f 2} and they only enter the integral in the combinations $$p=l_0-l, \quad q=m_0-m.$$ We may then write a Fraunhofer approximation to Eq. \ref{eq. Kirchoff integral 5} as
+\begin{equation} \label{eq. Fraunhofer integral}
+    U(P)=C\int_{\mathcal{A}}e^{-ik(p\xi+q\eta)}d\xi d\eta.
+\end{equation}
+Where $C$ is the constant prefactor in Eq. \ref{eq. Kirchoff integral 5}. It is often convenient to write Eq. \ref{eq. Fraunhofer integral} in terms of the aperture function $A(\xi,\eta)$, which is defined as being constant within the aperture and zero outside the aperture. We then have
+\begin{equation} \label{eq. Fraunhofer integral 2}
+    U(p,q)=\int_{-\infty}^{\infty}A(\xi,\eta)e^{-ik(p\xi+q\eta)}d\xi d\eta.
+\end{equation}
+The integration now extend over all space, and its true nature as a Fourier transform is clear. The aperture function is also called the pupil function.
+
+
+\end{document}

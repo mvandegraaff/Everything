@@ -1,0 +1,45 @@
+\documentclass[../../main.tex]{subfiles} % Use the main document's preamble
+
+\begin{document}
+\chapter{Formulas}
+This document is for everything. all the formulas. forever. The path to this file from (from sr gradiometer) is \verb|Z:\home\Vandy\Latex\Postdoc all formulas|. 
+
+\section{Lande g-factors}
+the lande g-facotrs or g factors are a proportionality term for the energy of an atom in a magnetic field
+
+$$ g_J=g_L\frac{J(J+1)-S(S+1)+L(L+1)}{2J(J+1)}+g_S\frac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}$$
+
+Where $g_L$ is the electrons orbital g-factor and $g_S$ is its spin g factor. $g_L$ is approximately 1, but Daniel Steck's notes also account for a finite nuclear mass to given $g_L=m_e/m_{nuc}$, but most sources just have it be one, and one source (https://iopscience.iop.org/article/10.1088/1402-4896/ab8f44) wondering if we ignore it. $g_S~2$ is also an approximation, $g_S=2.00231930436256$ but it has been measured like nuts. 
+
+therefore, we often approximate $$g_J=1+\frac{J(J+1)+S(S+1)-L(L+1)}{2J(J+1)}$$
+
+\section{Doppler Broadening (from wikipedia)}
+For non relativistic thermal velocities the doppler shift is $$\omega_v=\omega_0(1+v/c)$$ $$\Delta\omega=kv$$ and for a system with a velocity distribution $P_v(v)$, meaning $P_v(v)dv$ is the probability (or fraction) of the system with velcoties $v$ to $v+dv$. Then the corresponding  distribution of frequencies would be $$P_\omega(\omega)d\omega=P_v(v_{\omega})\frac{dv}{d\omega}d\omega$$ where $v_\omega=c(\omega/\omega0-1)$ is the corresponding velocity for the freuqnecy $\omega$. We therefore have $$P_\omega(\omega)d\omega=\frac{c}{\omega}P_v\left(c\left(\frac{\omega}{\omega_0}-1\right)\right)d\omega$$. We can also expressed in terms of wavelength, where in the nonrelativistic limit we may used that $\frac{\lambda-\lambda_0}{\lambda_0}\approx -\frac{\omega-\omega_0}{\omega_0}$ so see that $$P_\lambda(\lambda)d\lambda=\frac{c}{\lambda_0}P_v\left(c\left(1-\frac{\lambda}{\lambda_0}\right)\right)d\lambda$$
+For a thermal, Maxwell-Boltzman distribution, we have the Maxwell distribution 
+\begin{equation}\label{eq. maxwell distribution}
+    P_v(V)dv=\sqrt{\frac{m}{2\pi k_b T}}\exp\left(-\frac{mv^2}{2k_bT}\right)dv,
+\end{equation}
+and so we substitute as appropriate and similpy to get $$P_\omega(V)d\omega=\sqrt{\frac{mc^2}{2\pi k_b T\omega_0^2}}\exp\left(-\frac{mc^2(\omega-\omega_0)^2}{2k_bT\omega_0^2}\right)d\omega$$ which is a Gaussian profile with $$\sigma_\omega=\sqrt{\frac{k_bT}{mc^2}}\omega_0$$, and since $FWHM=2\sqrt{2\ln2}\sigma$ we have 
+\begin{equation}
+    \Delta\omega_{FWHM}=\sqrt{\frac{8k_bT\ln2}{mc^2}}\omega_0
+\end{equation}
+
+\section{Optical cross-section}
+
+the resonant cross section for a transition is 
+\begin{equation}
+    \sigma_0=\frac{3\lambda^2}{2\pi}    
+\end{equation}
+I have had a terrible time trying to remember the numerical prefactor, but i think i've figure out an intuitive way to remember! Consider that while the wavelength in nano meters and the frequency in MHz are what we use to describe it physically, for the math we use angular frequency $\omega=2\pi f$, we basically don't use $f$ alone in the math. Why should we behave differently with wavelength? I hate using $h=2\pi\hbar$ and $k=\lambdabar^{-1}=2\pi/\lambda$ is already our typical thing, so lets swap $\lambda$ for $\lambdabar$. then, very intuitively, the cross-section is $\sigma 3*2*\pi\lambdabar^2$ where the three is for three directions, and the two is for two polarizations. So thus, 
+\begin{equation}\label{eq. optical cross-section}
+   \sigma_0=6\pi\lambdabar^2=\frac{3\lambda^2}{2\pi}
+\end{equation}
+which is going to be much easier to remember!
+\section{Gaussian beams}
+peak intensity of a gaussian beam is (remember the factor of two!)
+\begin{equation}
+    P_0=\frac{2P}{\pi\omega_x\omega_Y}
+\end{equation}
+
+
+\end{document}

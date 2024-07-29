@@ -1,0 +1,182 @@
+\documentclass[../../main.tex]{subfiles} % Use the main document's preamble
+
+\begin{document}
+
+\chapter{Math}
+\section{Gaussian integrals}
+\begin{equation}
+    \int_\infty^\infty e^{-\frac{ax^2}{2}} dx = \sqrt{\frac{2\pi}{a}} 
+\end{equation}
+\begin{equation}
+    \int_\infty^\infty e^{-\frac{x^2}{2\sigma^2}} dx = \sigma\sqrt{2\pi} 
+\end{equation}
+\begin{equation}
+    \int r e^{-\frac{r^2}{2\sigma^2}}dr=\sigma^2
+\end{equation}
+
+\begin{equation}
+    \int_\infty^\infty e^{-\frac{x^2}{2\sigma^2}} dx \times \int_\infty^\infty e^{-\frac{y^2}{2\sigma^2}} dy = 2\pi\sigma^2
+\end{equation}
+
+\section{Green's Theorem}
+Following section 1.8 of Jackson. Green's theory  follows from the divergence theorem, which states that the volume integral of the divergence of a vector field $\mathbf{A}$ is equal to the surface integral of the normal component of $\mathbf{A}$ over the surface enclosing the volume.
+
+\begin{equation}\label{eq. divergence theorem}
+    \int_V \nabla\cdot\mathbf{A} dV = \oint_S \mathbf{A}\cdot d\mathbf{a}
+\end{equation}
+for any well-ehaved vector field $\mathbf{A}$ and volume $V$ enclosed by surface $S$. Let $\mathbf{A}=\phi\nabla\psi$, where $\phi$ and $\psi$ are arbirary scalar fields (i suppose subject to the constraint of producing a suitable vector field). We use the identity 
+\begin{equation}
+    \nabla\cdot(\phi\nabla\psi)=\phi\nabla^2\psi\cdot + \nabla\phi\cdot\nabla\psi
+\end{equation}
+Alongside this, the normal component of $\mathbf{A}$ on the surface $S$ is given by:
+
+\begin{equation}
+\phi\nabla\psi\cdot\mathbf{n} = \phi\frac{\partial\psi}{\partial n}
+\end{equation}
+
+where $\mathbf{n}$ is the (outward) unit normal to the surface $S$. Substituting $\mathbf{A} = \phi\nabla\psi$ in the divergence theorem, we get:
+
+\begin{equation} \label{eq. Green's First identity}
+\int_V (\phi\nabla^2\psi + \nabla\phi\cdot\nabla\psi) dV = \oint_S \phi\frac{\partial\psi}{\partial n} d\mathbf{a}
+\end{equation}
+
+Consider \ref{eq. Green's First identity} where wwe exchange the roles of $\phi$ and $\psi$ and subtract the result from the original. We get
+\begin{equation} \label{eq. Green's Theorem}
+    \int_V (\phi\nabla^2\psi - \psi\nabla^2\phi) dV = \oint_S \left(\phi\frac{\partial\psi}{\partial n} - \psi\frac{\partial\phi}{\partial n}\right) d\mathbf{a}
+\end{equation}
+which is Green's theorem. Ok. Cool. But how is this helpful for us?
+\paragraph{What are Green's functions? Building up intuition} (The following discussion actually is my own thoughts, obviously informed by texts, but this is mostly me, expect when i refer to definitonsand terms like fundamental solution or the boundary condisiton) A Green's function is a response function. A related idea is a so-called \textit{fundamental solution}; all Green's functions are fundamental solutions, but not all fundamental solutions are Green's functions. A fundamental solution is a solution to a differential equation with a delta function source. A Green's function is a fundamental solution that is also symmetric and obeys boundary conditions.  
+
+What does that mean? Well, maybe this is bad intuition, but I think of a differential operator $L$ as a thing which relates function to its derivatives, and therefore $L$ is a thing that in some sense ``propagates'' the function from places where it is known, to the rest of the domain. $L$ is not a \textit{propagator}, its a connector, again i mean that colloquilally. It tells you how a particular distribution of the function will eolve as one moves within the domain. 
+
+A fundamental solution is a function $F$ such that $LF\propto\delta$ (the coefficent of the delta function depends on the dimensionallity and coordinate system, the ). In other words, $F$ is a function that is zero everywhere except at the origin, where it is infinite. The delta function is a source, and $F$ is the response to that source. It is often called an impulse response function. Importantly, a fundamental solution $F$ does not depend on the boundary conditions of the problem, it is a property of the differential operator $L$ alone. To reiterate, a fundamental solution (function) $F$ of a differential operator $L$ satisies
+\begin{equation}\label{eq. fundamental solution}
+    LF\sim\delta(x)
+\end{equation}
+The $\delta$ function is a (impulsive) source, and it is infinitely sharp, short, and tall. A point particle with mass $m>0$ is a impulse source of the gravitational potential, and the operator which connects that source to the potential is the Laplacian. The fundamental solution of the Laplacian is the Newtonian potential, which is the potential of a point particle with mass $m$ at the origin. In this case, when we said "it is infinitely sharp, short, and tall" mean that the mass density is infinite, and the spatial extent is zero. the situation is literally exactly analogous for the electric potential of a point charge. An infinitely loud, brief acoustic signal would be another example of a delta function source.
+
+As stated above, a Green's function is an example of a fundamental solution, but it is a special kind of fundamental solution. A Green's function is a fundamental solution that obeys the boundary conditions of the problem. In other words, it is a fundamental solution that is also a solution to the problem for an impulse source. but it is alsot the case that the Green's function always satisfies
+\begin{equation}\label{eq. Green's function A}
+    LG(x,x')=\delta(x-x')
+\end{equation}
+
+We have just referred to the boundary conditions of a problem; the boundary conditions are the conditions imposed on the solution at the boundary of the domain. The boundary conditions are going to be the other thing that determines the form of the Green's function we will leverage to provide our solution. Let's consider again Green's theorem, Eq. \ref{eq. Green's Theorem} when we have decided 
+(just now, right htis moment) that the function $\psi$ is the Green's function $G(x,x')$ and the function $\phi$ is the solution to the problem $f(x)$. What we mean by this is that in addition to \ref{eq. Green's function A}, we also have 
+\begin{equation}
+    L\phi(x)=f(x)
+\end{equation}
+and we want to solve for $\phi(x)$. We can evaluate Eq. \ref{eq. Green's Theorem} with these facts in mind to find that 
+
+\begin{equation} \label{eq. Green's integral equation1}
+    \int_V \phi(x)\cancelto{\delta(x-x')}{\nabla^2G(x,x')} - G(x)\cancelto{f(x')}{\nabla^2\phi(x')} :dV= \oint_S \left(\phi(x')\frac{\partial G(x,x')}{\partial n} - G(x,x')\frac{\partial \phi(x')}{\partial n}\right) d\mathbf{a},
+\end{equation}
+which resolves and rearranges to give an integral equation for $\phi(x)$
+\begin{equation}\label{eq. Green's integral equation2}
+    \phi(x)=\int_V G(x-x')f(x')d^nx' + \oint_S \left(\phi(x')\frac{\partial G(x,x')}{\partial n'} + G(x,x')\frac{\partial \phi(x')}{\partial n'}\right) d\mathbf{a'},
+\end{equation}
+And here is where we begin to see the power of Green's functions. We have reduced the problem of solving a differential equation to the problem of solving an integral equation, which is often much easier. But \textit{why} is it easier? Well, we have a lot of freedom in choosing the Green's function, and we can use that freedom to make the integral equation easier to solve. In particular, we may choose Green's function to make one of the terms (in general you cannot supress both) in the surface integral vanish. 
+
+This brings us to the two primary types of boundary conditions we will encounter: Dirichlet and Neumann. Dirichlet boundary conditions are those where the value of the function is specified at the boundary, while Neumann boundary conditions are those where the value of the (normal) derivative of the function is specified at the boundary. Those terms refer to our knowledge of the function at the boundary, not the form of the Green's function, but they determine certain properties of the Green's function. If we know the value of the function at the boundary (Dirichlet), we can choose the Green's function to make the second term in Eq. \ref{eq. Green's integral equation2} vanish. If we know the value of the (normal) derivative of the function at the boundary (Neumann), we can choose the Green's function to make the first term in Eq. \ref{eq. Green's integral equation2} vanish.
+
+\subsubsection{Constructing Green's functions for Dirichlet boundary conditions}
+(Following in part Section 8.5 of ``Modern Electrodynamics'' by Andrew Zangwill (first edition i believe), also following https://home.cc.umanitoba.ca/~dtrim/BooksandNotes/PDE/Green.pdf (notes from chapter 13 of an unpublished revision of Donald Trim's ``Applied Partial Differential equations'', i have it downloaded to hogan labs file server if that link dies) ) Of course all that is easier said than done, and we need to know how to construct Green's functions. One method is the \emph{method of images} which uses image charges to construct the greens function. But it is only applicable to a limited set of problems. Another more general method is to use the \emph{method of eigenfunction expansion}. This method is general, but it is also a bit abstract. However, it is a recipe for constructing Green's functions for any problem procedurally. 
+
+In the method of eigenfunction expansion, we begin by expanding the Green's function in terms of the eigenfunctions of the differential operator $L$. We will start with a general two dimensional problem in the hopes that generalization will be clear. We may make furtur assumptions which reduce the generality as we proceed. But for now, we remain general, though it should be noted that Trim uses a rectangular opening in a grounded plane to illustrate the method, so modifications to the equations derived from Trim's text will be aplenty). We begin by expanding the Green's function in terms of the eigenfunctions of the differential operator $L$: 
+\begin{equation}\label{eq. Green's function eigenvalue problem}
+    \begin{aligned}
+        Lu+\lambda^2u=&0 & & \in V\\
+        u(x,y)=&0 & & \in S
+    \end{aligned}
+\end{equation}
+where $\lambda$ is the eigenvalue and $u$ is the eigenfunction defined over the domain $V$ and its boundary $S$. Let us label the eigenfunctions $u_n(x,y)$ and the eigenvalues $\lambda_n$. We may expand the Green's function in terms of the eigenfunctions of the differential operator $L$:
+\begin{equation}\label{eq. Green's function expansion}
+    G(x,y;x',y')=\sum_n\frac{u_n(x,y)u_n^*(x',y')}{\lambda_n^2}
+\end{equation}
+similar (but more general) to Zangwill (8.5.3 eq 8.71). Trim instead expresses this in a less developed form in eq. 13.23. which i shall gneralize to 
+\begin{equation}\label{eq. Green's function expansion Trim}
+    G(x,y,x',y')=\sum_n c_n u(x,y)
+\end{equation}
+so we must calculate the coefficients $c_n$. We do this by substituting Eq. \ref{eq. Green's function expansion Trim} into the necessarily true statement $LG(x,y;x',y')=\delta(x-x')\delta(y-y')$ 
+\begin{equation}\label{eq. Green's function expansion Trim2}
+    \begin{aligned}
+        LG(x,y;x',y')=&\delta(x-x')\delta(y-y')\\
+        \sum_n c_n Lu_n(x,y)=&\delta(x-x')\delta(y-y')\\
+        \sum_n c_n (-\lambda_n^2)u_n(x,y)=&\delta(x-x')\delta(y-y')\\
+        \sum_n c_n \lambda_n^2u_n(x,y)=&-\delta(x-x')\delta(y-y')
+    \end{aligned}
+\end{equation}
+now, we express the delta function as a sum of the eigenfunctions (this is an identity that is true generally? i think? its is intuitively obvious, but is expounded upon in section 7.4 of Zangwill, and i think it is also in Trim, but i dont have that part of the text)
+\begin{equation}\label{eq. delta function expansion}
+    \delta(x-x')\delta(y-y')=\sum_n u_n(x,y)u_n^*(x',y')
+\end{equation}
+comparing the last line of Eq. \ref{eq. Green's function expansion Trim2} and Eq. \ref{eq. delta function expansion} we see that the coefficients $c_n$ are given by
+\begin{equation}\label{eq. Green's function expansion Trim3}
+    c_n=-\frac{u_n^*(x',y')}{\lambda_n^2}
+\end{equation}
+which is the result Zangwill implicitly uses.
+\begin{aside}
+    I want to make clear that i'm modifying the source text to fit with each other better, and so comparison to the source text will require some parsing to see how the equations relate. 
+\end{aside}
+This is the general form of the Green's function expansion, the only other detail is to determine the eigenfunctions and eigenvalues. We do this by staring at the problem and guessing. For example, if we have a rectangular opening in a grounded plane, we might guess that the eigenfunctions are the sines and cosines of the form $u(x,y)=\sin(k_xx)\sin(k_yy)$, and we would be right. We would then solve for the eigenvalues by substituting the eigenfunctions into the eigenvalue problem, Eq. \ref{eq. Green's function eigenvalue problem}, and solving for $\lambda$. This is the sad reality of differential equations. 
+
+
+
+
+
+
+
+
+
+\subsubsection{Constructing Green's functions for Neumann boundary conditions}
+meh. i dont want to do this right now.
+
+\section{trig}
+
+\subsection{hyperbolic trig}
+\begin{equation}
+    \sinh(x)=\frac{e^x-e^{-x}}{2}
+\end{equation}
+\begin{equation}
+    \cosh(x)=\frac{e^x+e^{-x}}{2}
+\end{equation}
+\begin{equation}
+    \tanh(x)=\frac{\sinh(x)}{\cosh(x)}=\frac{e^x-e^{-x}}{e^x+e^{-x}}
+\end{equation}
+\begin{equation}
+    \cosh^2(x)-\sinh^2(x)=1
+\end{equation}
+
+the inverse hyperbolic trig functions are defined as
+\begin{equation}
+    \begin{aligned}
+        \operatorname{arsinh} x &= \ln \left(x + \sqrt{x^2 + 1}\right)               & -\infty &< x < \infty, \\
+        \operatorname{arcosh} x &= \ln \left(x + \sqrt{x^2 - 1}\right)               & 1 &\leq x < \infty, \\
+        \operatorname{artanh} x &= \frac12\ln\frac{1+x}{1-x}                         & -1 &< x < 1, \\
+        \operatorname{arcsch} x &= \ln \left(\frac1x + \sqrt{\frac1{x^2} + 1}\right) & -\infty &< x < \infty,  x \neq 0, \\
+        \operatorname{arsech} x &= \ln \left(\frac1x + \sqrt{\frac1{x^2} - 1}\right) & 0 &< x \leq 1, \\
+        \operatorname{arcoth} x &= \frac12\ln\frac{x+1}{x-1}                         & -\infty &< x < -1 \ \ \text{or} \ \ 1 < x < \infty.
+        \end{aligned}
+\end{equation}
+composition with the hyperbolic trig functions yields the following identities
+\begin{equation}\label{eq. hyperbolic trig identities composition}
+    \begin{aligned}
+        \sinh(\operatorname{arcosh}x) &= \sqrt{x^{2} - 1}  \quad \text{for} \quad |x| > 1 \\
+        \sinh(\operatorname{artanh}x) &= \frac{x}{\sqrt{1-x^{2}}} \quad \text{for} \quad -1 < x < 1 \\
+        \cosh(\operatorname{arsinh}x) &= \sqrt{1+x^{2}} \\
+        \cosh(\operatorname{artanh}x) &= \frac{1}{\sqrt{1-x^{2}}} \quad \text{for} \quad -1 < x < 1 \\
+        \tanh(\operatorname{arsinh}x) &= \frac{x}{\sqrt{1+x^{2}}} \\
+        \tanh(\operatorname{arcosh}x) &= \frac{\sqrt{x^{2} - 1}}{x} \quad \text{for} \quad |x| > 1
+       \end{aligned}
+\end{equation}
+
+\section{Derivatives}
+\subsection{Derivative of \texorpdfstring{$a^x$}{a\^x}}
+To find the derivative of $a^x$ with respect to $a$, we employ logarithmic differentiation. Let's start by taking the natural logarithm of both sides:
+
+
+
+Differentiating both sides with respect to $a$ gives:
+
+
+
+\end{document}

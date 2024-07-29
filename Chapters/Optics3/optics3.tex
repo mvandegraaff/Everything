@@ -1,0 +1,406 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+\chapter{Fourier Optics, following Goodman}
+
+These will be my notes on fourier optics following the presentation of Joseph Goodman's widely used text ``Introduction to Fourier Optics''. I will be using the fourth edition, from 2017.
+\section{Introduction and chapter 2}
+The text opens (in hapter two) with a discussion of linear systems, which is an emphasis that hasn't beenas clear in other treatments of the text, thogh obvious lies at the heart of optical physics. The text also immediatly appeals to the language of linear systems theory, which is a bit of a barrier to entry. But basically there is a focus on reducing the problem so how a system responds to what Goodman refers to as `elementary' stimuli. One can then use the linearity of the system to build up a response to more complicated stimuli.
+
+\subsection{Fourier 2d}
+We repeat Goodmans definitions of Fourier analysis in two dimensional systems to estblish the notation. we defife the Fourier transform of a function $g(x,y)$ as
+$\mathcal{F}\{g\}$ to be
+\begin{equation}\label{eq. Fourier transform GM}
+    \mathcal{F}\{g\}=\int_{-\infty}^{\infty}g(x,y)e^{-i2\pi(f_x x+f_yy)}dxdy
+\end{equation}
+where apparently Goodman uses $j$ for $i$ because he is a monster (copilot wrote that monster comment Liouville), but i will probably use $i$? i haven't decided lol. The inverse Fourier transform $\mathcal{F}^{-1}\{G\}$ is then defined as
+\begin{equation}\label{eq. inverse Fourier transform GM}
+    \mathcal{F}^{-1}\{G\}=\int_{-\infty}^{\infty}G(f_x,f_y)e^{i2\pi(f_x x+f_yy)}df_xdf_y
+\end{equation}
+where $G(f_x,f_y)$ is the Fourier transform of $g(x,y)$. Notice that this convention includes the $2\pi$ in the exponent of the forward transform, which is not always the case, but its objectively the best convention. For \ref{eq. inverse Fourier transform GM} and \ref{eq. Fourier transform GM} to be meaningfull, we must have some conditions on $g$
+\begin{enumerate}
+    \item $g$ must be absolutely integrable over the entire $x-y$ plane
+    \item $g$ must be continuous everywhere except at a finite number of finite discontinuities and a finites number of extrema in any finite rectangle.
+    \item $g$ must have no infinite discontinuities.
+\end{enumerate}
+These conditions are a common set to be used, but one can weaken of strengthen them as needed, apparently. A nice quote from Bracewell is given here ``physical possibility is a valid sufficient condition for the existence of a Fourier transform''. But certain functions are weird, like this limit form of the Dirac delta function
+\begin{equation}\label{eq. dirac delta limit}
+    \delta(x,y)=\lim_{N\to\infty}N^2\exp{\left[-N^2\pi(x^2+y^2)\right]}
+\end{equation}
+but we can define generalized transforms for the functions in the defining sequence, and then take the limit of the transforms. for the above, we have
+\begin{equation}\label{eq. dirac delta limit transform}
+    \mathcal{F}\{\delta\}=\lim_{N\to\infty}\mathcal{F}\{N^2\exp{\left[-N^2\pi(f_x^2+f_y^2)\right]}\}=\lim_{N\to\infty}\exp{\left[-\frac{\pi(f_x^2+f_y^2)}{N^2}\right]}=1.
+\end{equation}
+Goodman notes that it is useful to think of Fourier tranforms as decomposiiton into elemenary functions of the form 
+\begin{equation}\label{eq. elementary function}
+    \exp{\left[-i2\pi(f_x x+f_yy)\right]}
+\end{equation}
+This form shows how the elemtary functions are plane waves in the $x-y$ plane, with the dirction of the wave ggiven by the angle 
+\begin{equation}\label{eq. elementary function angle}
+    \theta=\tan^{-1}\left(\frac{f_y}{f_x}\right)
+\end{equation}
+and the wavelength given by
+\begin{equation}\label{eq. elementary function wavelength}
+    \lambda=\frac{1}{\sqrt{f_x^2+f_y^2}}
+\end{equation}
+\subsection{theorem and identities}
+Several theorems are given, i wont even list the linearity conditions here, but also have the Similarity theorem which is 
+\begin{equation}\label{eq. similarity theorem}
+    \mathcal{F}\{g(ax,by)\}=\frac{1}{|ab|}\mathcal{F}\{g(x,y)\}
+\end{equation}
+which shows how scaling behaves recipricolly in real and Fourier space. The shift theorem is:
+\begin{equation}\label{eq. shift theorem}
+    \mathcal{F}\{g(x-x_0,y-y_0)\}=e^{-i2\pi(f_xx_0+f_yy_0)}\mathcal{F}\{g(x,y)\}
+\end{equation}
+which shows how a shift in real space is a phase shift in Fourier space (i'm not sure i appreciated that before). Raylieghs or Parsevals theorem is
+\begin{equation}\label{eq. Rayleighs theorem}
+    \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}|g(x,y)|^2dxdy=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}|G(f_x,f_y)|^2df_xdf_y
+\end{equation}
+which is a statement of conservation of energy. The convolution theorem is
+\begin{equation}\label{eq. convolution theorem}
+    \mathcal{F}\{g\otimes h\}=G(f_x,f_y)H(f_x,f_y)
+\end{equation}
+which is a statement of the fact that convolution in real space is multiplication in Fourier space. The autocorrelation theorem is
+\begin{equation}\label{eq. autocorrelation theorem}
+    \mathcal{F}\{\int_{\infty} g(\xi,\eta)g^*(\xi-x,\eta-y)dxdy\}=|G(f_x,f_y)|^2
+\end{equation}
+which is a special case of the convolution theorem for the case where $h=g^*(x,y)$. The differentiation theorem is
+\begin{equation}\label{eq. differentiation theorem}
+    \mathcal{F}\left\{\frac{\partial^ng}{\partial x^n}\right\}=(i2\pi f_x)^nG(f_x,f_y) ? ? ?
+\end{equation}
+idk this. 
+The rotation theorem for $\mathcal{F}\{g(r,\theta)\}=G(\rho,\phi)$ is that $g(r,\theta+\theta_0)$ is a rotation of $G(\rho,\phi+\theta_0)$ by an identical angle $\theta_0$. in rectangular coordinates, this is
+\begin{equation}\label{eq. rotation theorem}
+    \mathcal{F}\{g(x\cos\theta-y\sin\theta,x\sin\theta+y\cos\theta)\}=e^{-i2\pi f_x x_0}G(f_x\cos\theta+f_y\sin\theta,f_y\cos\theta-f_x\sin\theta)
+\end{equation}
+The shear theorem is
+\begin{equation}\label{eq. shear theorem}
+    \mathcal{F}\{g(x+ay,y)\}=e^{-i2\pi af_yy}G(f_x,f_y)
+\end{equation}
+and similarly for the other shear. Goodman also points out that sperability is a useful property, where if $g(x,y)=f(x)h(y)$ then $G(f_x,f_y)=F(f_x)H(f_y)$.
+
+\subsection{Local spatial frequency}
+Gonsider the function 
+\begin{equation}\label{eq. general function1}
+    g(x,y)=a(x,y)\exp{\left[i\phi(x,y)\right]}
+\end{equation}
+where $a(x,y)$ is the slowly varying amplitude and $\phi(x,y)$ is the phase. The local spatial frequency is defined as the gradient of the phase
+\begin{equation}\label{eq. local spatial frequency}
+    \vec{f}^{(l)}=\frac{1}{2\pi}\left(\frac{\partial\phi}{\partial x},\frac{\partial\phi}{\partial y}\right)=\frac{1}{2\pi}\nabla\phi
+\end{equation}
+for the case $g(x,y)=\exp{[i2\pi(f_xx+f_yy)]}$, we have $\vec{f}^{(l)}=(f_x,f_y)$, which is the local spatial frequency. The local spatial frequency is a vector, and the magnitude of the vector is the local spatial frequency magnitude.
+in this simple case its exactly as we would naively guess. Next we consider a space limited function $g(x,y)$, which is zero outside of some region 
+\begin{equation}\label{eq. finite chirp}
+    g(x,y)=\exp{[i\pi\beta(x^2+y^2)]}\text{rect}\left[\frac{x}{L_x}\right]\text{rect}\left[\frac{y}{L_y}\right]
+\end{equation}
+where $\text{rect}[x]$ is the rectangular function, which is 1 for $|x|<1/2$ and zero otherwise. The local spatial frequencies are then
+\begin{equation}
+    f^{(l)}_x=\beta\: x\:\text{rect}\left[\frac{x}{L_x}\right],\quad f^{(l)}_y=\beta\: y\:\text{rect}\left[\frac{y}{L_y}\right]
+\end{equation}
+This time the local spatial frequency is not constant, but varies linearly with position, and is confined to a rectangle in the $x-y$ plane. 
+
+It is tempting to think tht since the local spatial frequencies are bounded to a rectangle, that the Fourier transform of $g(x,y)$ will be confined to a rectangle in Fourier space. However, this is not the case! The shape of the spectrum depends fundamentally on the product $\frac{L_xL_y}{4}\beta$ which will be called the Fresnel number. We shall see that for Fresnel numbers greater than unity, the local spatial frequency distribution can yield good results about the shape nd extent of the spectrum, but for Fresnel numbers less than unity, the local spatial frequency distribution is not a good approximation to the spectrum.
+
+The Fourier transform of \ref{eq. finite chirp} is , according to the definition, 
+\begin{equation}\label{eq. finite chirp transform}
+    G(f_x,f_y)=\int_{-L_x/2}^{L_x/2}\int_{-L_x/2}^{L_y/2}\exp{\left[i\pi\beta(x^2+y^2)\right]}e^{-i2\pi(f_xx+f_yy)}dxdy
+\end{equation}
+blah blah blah, i'm not going to do the math here, i dont think the result is mporantant yet either. but the point is that the spectrum is not confined to a rectangle in Fourier space, but rather is a function of the Fresnel number.
+
+\subsection{chapter 2 }
+theres a whole thing about the Wigner distribution function, which is a way to represent the local spatial frequency distribution. i've never heard of it before. i will ignore it for now. then theres a section about linear systems, which brings up impulse response AKA point spread functions. 
+
+Goodman brings up invariant linear systems, which are systems where the impulse response $h(t;\tau)$ is time invariant, that is, the response at $\tau$ following an impulse at $t$ depends only on $\tau-t$. This is typically how electrical circuits behave. in optics, however, the impulse response is not time invariant, but rather space invariant. That is, the response at $x,y$ following an impulse at $x_0,y_0$ depends only on $x-x_0$ and $y-y_0$. This is because the speed of light is finite. 
+
+That leads to a discussion on the utility of transfer functions, which are how the system behaves in the frequency domain and arehelpful for simplifying the math. 
+
+Then follows a lengthy section on sampling, and reconstructtion of a signal from its samples. This is a very important topic, but i will skip it for now. But the Whittaker-Shannon sampling theorem is important. as is the concept of the Nyquist frequency. they also discuss he space badwidth product.
+
+Then section 2.5 is about the discrete Fourier transform, which is a way to numerically calculate the Fourier transform of a discrete set of data. This is important, but i will skip it for now. 2.6 covers the projection slice theorem,  which i think is intuitively obvious. section 2.7 very breifly covers phase retrieval. 
+
+\section{chapter 3, Scalar diffraction theory}
+This chapter is about the scalar diffraction theory, which is the theory of diffraction of scalar waves. This is a good approximation for light when the wavelength is much smaller than the smallest dimension of the aperture. This is a good approximation for most optical systems.
+
+I will skip the first four sections, since they are about the Kirchoff integral theorem, which i have already covered in the optics2 notes. Also the treatment of Born and Wolf is much more clearly written. most because of the figures. 
+\subsection{3.5 The Rayliegh Sommerfeld diffraction theory}
+The assumptions of Kirchoff in deriving the Kirchoff integral theorem include that the field and its dervitive are simultaneously zero for all points on the screen. This mathematically means the field must be zero everywhere for an analytic function, a basic theorem of complex analysis. Additionally, the boundary conditions at the edge of the aperture mean the field is not identical to the n perturbed field. However, the criticism that motivate Sommerfeld were those raised by Poincare, namely that the theory itself is not self consistent, as onemoves the observation point closer to the aperture, the field diverges from its assumed value. but whevver its fine.
+
+Consider the Kirchoff integral theorem as given by Goodman (3-30):
+\begin{equation}\label{eq. Kirchoff integral theorem GM}
+    U(P_0)=\frac{1}{4\pi}\int_{\mathcal{A}}\left[G\frac{\partial U(P)}{\partial n}-U(P)\frac{\partial G}{\partial n}\right]dS
+\end{equation}
+where $G$ is the appropriate greens function (remember i have notes on greens functions in the math notes). Sommerfeld pointed out that with a sitable choice of the Green's function, one of the terms in the integrand can be eleminated. Via he method of images, one can show that the Greens functions which kill the first and second term in the integrand are, respectively
+\begin{equation}\label{eq. Greens function minus}
+    G_-=\frac{e^{ikr}}{r}-\frac{e^{ikr'}}{r'}
+\end{equation}
+and
+\begin{equation}\label{eq. Greens function plus}
+    G_+=\frac{e^{ikr}}{r}+\frac{e^{ikr'}}{r'}
+\end{equation}
+where $r$ is the distance from $P_0$ to $P$ on the apertureand $r'$ is the distance from the fictitious image point $P'_0$ to the point $P$ on the aperture. clearly $G_-$ and $G_+$ are the Greens functions which kill off the first and second terms in the integrand of \ref{eq. Kirchoff integral theorem GM} respectively. doing some math yields the first Sommerfeld solution for the field at $P_0$ as
+\begin{equation}\label{eq. Sommerfeld solution 1}
+    U_I(P_0)=-\frac{1}{2\pi}\int_{\mathcal{A}}U(P)\left[ik-\frac{1}{r}\right]\frac{e^{ikr}}{r}\cos(\mathbf{n},\mathbf{r})dS
+\end{equation}
+where $\cos(\mathbf{n},\mathbf{r})$ is the cosine of the angle between the normal to the aperture and the distance vector from the source to the point on the aperture. This is the first Sommerfeld solution in its full form (3-35 in Goodman).
+
+\begin{aside}
+    this can be written as a convolution:
+    \begin{equation}\label{eq. Sommerfeld solution 1 convolution}
+       U_I(x,y,z)=h(x,y,z)*U(x,y,0)
+    \end{equation}
+    where $h(x,y,z)$ is the impulse response of the system which we may write as 
+    \begin{equation}\label{eq. impulse response}
+        h(x,y,z)=\frac{z}{2\pi r}\left[ik-\frac{1}{r}\right]\frac{e^{ikr}}{r}
+    \end{equation}
+    where $z/r$ is the relevant cosine term.
+\end{aside}
+
+We could find a solution $U_{II}(P_0)$ by using the other Greens function, but Dirichlet boundary conditions are generally easier and more intuitive to work with, so we will use the first Sommerfeld solution. The second Sommerfeld solution is given by equations 3-39, 3-40 in Goodman. They are derived using the same method of images, but with the Greens function $G_+$. It is given by
+\begin{equation}\label{eq. Sommerfeld solution 2}
+    U_{II}(P_0)=\frac{1}{2\pi}\int_{\mathcal{A}}\frac{\partial U(P)}{\partial n}\frac{e^{ikr}}{r}dS
+\end{equation}
+
+\subsubsection{Rayliegh-Sommerfeld diffraction formula}
+The full expression for the first Sommerfeld solution is is given by \cref{eq. Sommerfeld solution 1}, but we now simplify t by assuming the far field, which kills the $1/r^2$ term in the integrand. This gives us:
+\begin{equation}\label{eq. Sommerfeld solution 1 far field}
+    U_I(P_0)=\frac{1}{i\lambda}\int_{\mathcal{A}}U(P)\frac{e^{ikr}}{r}\cos(\mathbf{n},\mathbf{r})dS
+\end{equation}
+
+At this point in the derivations of the Sommerfeld solutions we have not specified the form of $U(P)$, but we will do so now. We will assume that the field on the aperture is given by a spherical wave, which is a good approximation for the case of a point source at a large distance from the aperture. The field on the aperture is then given by:
+\begin{equation}\label{eq. spherical wave U}
+    U(P)=A\frac{e^{ikr_{21}}}{r_{21}}
+\end{equation}
+
+Then \cref{eq. Sommerfeld solution 1 far field} becomes
+\begin{equation}\label{eq. Sommerfeld solution 1 far field spherical wave}
+    U_I(P_0)=\frac{A}{i\lambda}\int_{\mathcal{A}}\frac{e^{ik(r_{21}+r_{01})}}{r_{21}r_{01}}\cos{(\mathbf{n},\mathbf{r}_{01})}dS
+\end{equation}
+
+\cref{eq. Sommerfeld solution 2} reuires computeing 
+
+\begin{equation}
+\begin{aligned}
+\frac{\partial U(P)}{A\partial n}&=ik\frac{\cos{(\mathbf{n},\mathbf{r}_{21})}}{r_{21}}e^{ikr_{21}}-\frac{\cos{(\mathbf{n},\mathbf{r}_{21})}}{r_{21}^2}e^{ikr_{21}}\\
+&=(ik-\frac{1}{r_{21}})\frac{\cos{(\mathbf{n},\mathbf{r}_{21})}}{r_{21}}e^{ikr_{21}}
+\end{aligned}
+\end{equation}
+
+We kill the second term by assuming large distance from the source and  we thus get
+Then \cref{eq. Sommerfeld solution 2} becomes
+\begin{equation}\label{eq. Sommerfeld solution 2 far field spherical wave}
+    U_II(P_0)=-\frac{A}{i\lambda}\int_{\mathcal{A}}\frac{e^{ik(r_{21}+r_01)}}{r_{21} r_01}\cos(\mathbf{n},\mathbf{r}_{21})dS
+\end{equation}
+ where the difference between the two is the overall sign and the cosine term. The cosine terms is generally nearly $-1$ so they are quite similar.
+ 
+ 
+\subsection{3.6 Kirchoff vs Sommerfeld}
+By the way, so far we have been assuming a spherical wave, name that on the aperture the field $U$ is given by
+\begin{equation}\label{eq. spherical wave}
+    U(P)=A\frac{e^{ikr_0}}{r_0}
+\end{equation}
+where $r_0$ is the distance from the source to the point on the aperture.Then, For the three case of the Kirchoff theory, Sommerfeld solution I and Sommerfeld solution II, the field at $P_0$ is given by
+\begin{equation}
+    U(P_0)=\frac{A}{i\lambda}\int_{\mathcal{A}}\frac{e^{ik(r+r_0)}}{rr_0}\psi dS
+\end{equation}
+where the obliquity factor $\psi$ is given in each case by
+\begin{equation}\label{eq. obliquity factor}
+    \psi=
+    \begin{cases}
+        \tfrac12 [\cos(\mathbf{n},\mathbf{r})-\cos(\mathbf{n},\mathbf{r_0})] & \text{Kirchoff}\\
+    \cos(\mathbf{n},\mathbf{r}) & \text{Sommerfeld I}\\
+    -\cos(\mathbf{n},\mathbf{r_0}) & \text{Sommerfeld II}
+    \end{cases}
+\end{equation}
+and we can see that the Sommerfeld solutions are the same as the Kirchoff solution except for the obliquity factor. In fact, the Kirchhoff solution is the average of the two Sommerfeld solutions. For the case of an infinitely distance point sorce, things simplify even more. Goodman notes that the Kirchoff solution is lets restricted in that it does not require a planar aperture, but the Sommerfeld solutions do. this is not a big deal, but it is a difference.
+
+A note about the distances. Goodman defines the observation point to be $P_0$, the point on the aperture to be $P_1$ and the source to be $P_2$, (figure 3.7 in Goodman). The distance from $P_0$ to $P_1$ is $\mathbf{r}_{01}=\mathbf{r}_0$ in my language (pointing from $P_1$ to $P_0$ in his), the distance from $P_2$ to $P_1$ is $\mathbf{r}_{21}=\mathbf{r}$. The vector $\mathbf{n}$ points from source to aperture, and is normal to the aperture.
+
+Goodman proceeds by choosing to focus on the first Rayliegh-Sommerfeld soution in the fair field form given by \cref{eq. Sommerfeld solution 1 far field}. The spherical wave source is not necessarily presumed in later portions. The theories are only differ in their results very close to the aperture, which is unsurprising, although Goodman doesn't areticulate precisly when version of the RS solutions are used, i believe it is the most simplified ones. Goodman also notes that while Kirchoff theory is internally inconsitent (RS are not), the RS theory requires planar screens, which Kirchhoff does not. It's not clear to me if the theories suffer at large angles $\cos{(\mathbf{n},\mathbf{r}_{21})}$. 
+
+\subsection{3.7 Furthur discussion of the Huygens Fresnel principle}
+The Huygens Fresnel principle is the familiar statement of Huygens principle, with extra details. Goodman provides a ``quasi-physical'' intepretation, based off this reepression of Sommerfeld I.
+\begin{equation}
+    U(P_0)=\frac{1}{i\lambda}\int_{\mathcal{A}}U(P)\frac{e^{ik(r)}}{r}\cos(\mathbf{n},\mathbf{r}) dS
+\end{equation}
+That interpretation is that the field at $P_0$ is the sum of the contributions from all points on the aperture, where each contribution is a secondary source spherical wave with the following four properties:
+\begin{enumerate}
+    \item the amplitude of the secondary wave is proportional to the amplitude of the primary wave at the point on the aperture
+    \item the amplitude is inversely proportional to the wavelength
+    \item the phase of the secondary wave \textit{leads} the phase of the primary wave by a quarter period
+    \item the secondary wave is attenuated by the factor $\cos(\mathbf{n},\mathbf{r})$ 
+\end{enumerate}
+I still dont get the leading phase thing. motiate it fromt he derivative of the field at $P$ on the aperture. Goodman writes: ``Since or basic monochromatic field disturbance is a clockwise rotating phasor of the form $\exp(-i2\pi\nu t)$, the derivative of this fucntion is proportional to both $\nu$ and $-i=1/i$''. I dont get it. oh wait... i do get it, i had a sign error in my head about the time relationship. 
+
+
+
+\section{Goodman Chapter 4, Fresnel and Fraunhofer}
+
+\subsection{Goodman 4.1.2, starting point before Fresnel}
+Skipping sectionmuch of 4.1 which is about physics, but section 4.1.2 defines the geometry. I do not understand why Googman has chosen the conventions for labeling points and directions as he has, but oh well. It is the same as in Goodman section 3.5. 
+
+The formula we are using from the previous chapter of Goodman is, as previously stated, the first RS formula, 
+
+\begin{equation}\label{eq. Sommerfeld solution 1 far field again}
+    U_I(P_0)=\frac{1}{i\lambda}\int_{\mathcal{A}}U(P)\frac{e^{ikr}}{r}\cos(\mathbf{n},\mathbf{r})dS.
+\end{equation}
+
+The cosine term is trivially $\cos(\mathbf{n},\mathbf{r})=\frac{z}{r_{01}}$ and thus we can write our starting point before invoking the Fresnel approximation:
+\begin{equation}\label{eq. Fresnel starting point}
+    U(x,y,z)=\frac{z}{i\lambda}\int_{\mathcal{A}}U(\xi,\eta)\frac{e^{ikr_{01}}}{r_{01}^2}d\xi d\eta.
+\end{equation}
+where $\xi$ and $\eta$ are the coordinates of the aperture and the distance $r_{01}$ is precisely 
+
+\begin{equation}\label{eq. r01 exact}
+r_{01}=\sqrt{z^2+(x-\xi)^2+(y-\eta)^2}
+\end{equation}
+
+This is our starting point before making the Fresnel approximations. We have first invoked the inherent approximation of the scalar theory, namely that the aperture is large which respect to the wavelength, see the discussion at the end of Goodman 3.2 for refresher; this has been fundamental in our entire discussion of the scalar theory. We have also invoked the far-field assumption, namely that $r_{01}\gg \lambda$. This was done in section Goodman 3.5.2. 
+
+\subsection{Goodman 4.2, The Fresnel Approximation}
+With \cref{eq. Fresnel starting point} as our starting point, we apply the binomial expansion and approximate:
+\begin{equation}\label{eq. binomial approx Fresnel}
+    r_{01}\approx z\left[1+\frac12 \left(\frac{x-\xi}{z}\right)^2+\frac12 \left(\frac{y-\eta}{z}\right)^2\right]
+\end{equation}
+For the $r_{01}$ which appears in the denominator, we are typically quite safe in furthur approximating $r_01\approx z$. However, in the exponent changes on the order of the wavelength are significant, and we shall therefore keep thehigher ordr terms in \cref{eq. binomial approx Fresnel}. Factoring out the $z$ contribution to the integrand gives:
+\begin{equation}\label{eq. Fresnel main diffraction formula 1}
+    U(x,y,z)=\frac{e^{ikz}}{i\lambda z}\int U(\xi,\eta,0)\exp{\left\{ \frac{ik}{2z}\left[(x-\xi)^2+(y-\eta)^2\right]\right\}}
+\end{equation}
+This is our first form of the \textit{Fresnel diffraction integral} or the Fresnel diffraction formula. 
+
+Equation \cref{eq. Fresnel main diffraction formula 1} is quite clearly a convolution, and we are going to skip that for now because it doesn't matter to this portion. 
+
+By factoring out the portion of the exponential which is independent of the integration variables we find anothe form of the Fresnel diffraction formula
+\begin{equation}\label{eq. Fresnel main diffraction formula 2}
+    U(x,y,z)=\frac{e^{ikz}}{i\lambda z}e^{\frac{ik}{2 z}(x^2+y^2)}
+    \int U(\xi,\eta,0)e^{ \frac{ik}{2z}(\xi^2+\eta^2)}e^{-\frac{i 2\pi}{\lambda z}(x\xi+y\eta)}
+    d\xi d\eta
+\end{equation}
+This second form of the Fresnel difrction formula shows how the obsered field $U(x,y,z)$ is the Fourier transform of the quantity  $U(\xi,\eta,0)e^{ \frac{ik}{2z}(\xi^2+\eta^2)}$. In other words, it is the transform of the field at the aperature with an additional quadratic phase. Therefore we can write it as 
+
+\begin{equation}\label{eq. Fresnel main diffraction formula 3}
+    U(x,y,z)=\frac{e^{ikz}}{i\lambda z}e^{\frac{ik}{2 z}(x^2+y^2)}
+    \mathcal{F}\left[U(\xi,\eta,0)e^{ \frac{ik}{2z}(\xi^2+\eta^2)}\right]\left(\frac{x}{\lambda z},\frac{y}{\lambda z}\right)
+\end{equation}
+
+Equation's \cref{eq. Fresnel main diffraction formula 1,eq. Fresnel main diffraction formula 2,eq. Fresnel main diffraction formula 3} are all equivalent expressions of the Fresnel diffraction formula. It's approximations are (1) large aperture vs wavelength, (2) far field vs wavelength, and (3) the approximation of the binomial theorem in this section, which is related to the stationary phase approximation. 
+
+\subsubsection{Goodman 4.2.1, Postive and negative Phases}
+this section is dedicated to discussing the annoying sign confusion of the problem, which depend on the convention used by the phasors (goodman chooses Clockwise, i.e. fields oscillate at $\exp{-i\omega t}$). This is a helpful conversation but not required for my present purpose yet. It also jumps the gun in its discussion of the relationship between the quadratic phase and spherial wavelets.
+
+\subsubsection{Goodman 4.2.2 and 4.2.3, Accuracy of the Fresnel Approximtion}
+The derivation of the Fresnel diffraction formulas has relied upon the Huygens-Fresnel princible, which treats every point of a field as a source for an outgoing spherical wavelet, and the field at a given obervaton ppoint is the sum of contributions from all the other points. Inspection of the Fresnel diffraction formulas shows that these spherical secondary wavelets have been replaced by wavelets with quadratic-phase wavefronts. (I think this is most directly seen in the form of \cref{eq. Fresnel main diffraction formula 1}; i think that the prefactor in \cref{eq. Fresnel main diffraction formula 2,eq. Fresnel main diffraction formula 3} are not fundamentlly the replacement being made). This was done specifically when the binomial approximation for the distance to the observation point from the aperture was invoked. 
+
+A naive measure of the accuracy of this approach thus requires that the higher order terms dropped from the binomial expansion mus be small. This turns out to be much too pessimistic. Rather, the requirement for validity of the approximatiion is that the value of the integral not change significantly with the addition of higher terms. Goodman shows how the behavior of this integral (which is quite appropriately given in terms of Fresnel integrals) is not so sensitive to higher order contributions. Goodman furthur describes how much of the aperture region contributes the main portion of the integral. This concept is alluded to be closely related t the \textit{princible of stationary phase}. 
+
+\subsubsection{Goodman 4.2.4 through 4.2.6}
+the next three sections deal with other details, 4.2.4 in particular returns to the convolution insight I skipped earlier, and discusses the power spectrom.
+
+\subsection{Goodman 4.3 the Fraunhofer Approximation}
+The Fraunhofer aproximation builds upon the Fresnel approximation by further supposing that the quadratic phase ($e^{ \frac{ik}{2z}(\xi^2+\eta^2)}$) added to the field $U(\xi,\eta,0)$ at the aperture may be replaced with unity. It is the Fraunhofer approximation which is the most pure manifestation of the concept that the field in the far field is the Fourier transform of the field over the aperture. 
+
+Goodman has several insightful comments which I will not delve into now. They include the (more stringent) limitations of regimes of validity and how these are ameliorated by ceratin geometries or via a lens. The effect of lens's is in Chapter 6 of Goodman. 
+
+\section{Thin lens as a Fourier Transformer} 
+Here we will derive the fact that a thin lens acts as a Fourier transformer. This section demonstrates the special case of a result derived in slightly more generality in the chapter 6 of Goodman, specifically section 6.2.2.
+Let's begin with the expression for the field $U(x,y,z)$ due to a diffraction through an aperture at the origin, where the field has value $U(\xi,\eta,0)$. Scalar difrraction theory gives the field under the Fresnel approximation (cite Goodman, equation 4-17) as 
+
+\begin{equation}\label{eq. Fresnel formula 1}
+    U(x,y,z)=\frac{e^{ikz}}{i\lambda z}e^{\frac{ik}{2 z}(x^2+y^2)}
+    \int U(\xi,\eta,0)e^{ \frac{ik}{2z}(\xi^2+\eta^2)}e^{-\frac{i 2\pi}{\lambda z}(x\xi+y\eta)}
+    d\xi d\eta
+\end{equation}
+or, equivalently:
+\begin{equation}\label{eq. Fresnel formula 2}
+    U(x,y,z)=\frac{e^{ikz}}{i\lambda z}e^{\frac{ik}{2 z}(x^2+y^2)}
+    \mathcal{F}\left[U(\xi,\eta,0)e^{ \frac{ik}{2z}(\xi^2+\eta^2)}\right]\left(\frac{x}{\lambda z},\frac{y}{\lambda z}\right)
+\end{equation}
+where we are the unitary Fourier transform operator $\mathcal{F}$. This approximation is valid when the aperture is small compared to the distance from the aperture to the observation plane, wen the distance beyond the aperture is large compared to the wavelength, and when the stationary phase approximation is valid. It is thus perfectly suitable for describing the propagation of a wavefront leaving a spatial light modulator (SLM) and propagating to a lens, and then to a camera. The effect of the lens is to introduce a quadratic phase $e^{-i\frac{k}{2f}(x^2+y^2)}$ to the field, where $f$ is the focal length of the lens (Goodman eq 6.10). Dickey also has this formula , at the beginning of section 2.6.3 but the supplemental material lacks the negative sign both Goodman and Dickey have.
+The electric field at the camera is thus two applications of the Fresnel formula, one for the propagation from the SLM to the lens, and one for the propagation from the lens to the camera, with the phase of the lens in between. The field at the camera is thus given by:
+\begin{equation}
+   \begin{aligned}
+   U(x,y,2f)=&\left(\frac{e^{ikf}}{i\lambda f}\right)e^{\frac{ik}{2 f}(x^2+y^2)}
+   \int \left[U(\xi,\eta,f)
+   \overbrace{\cancel{e^{-\frac{ik}{2f}(\xi^2+\eta^2)}}}^{lens
+   }\right]
+   \overbrace{\cancel{e^{ \frac{ik}{2f}(\xi^2+\eta^2)}}}^{Fresnel}
+   e^{-\frac{i 2\pi}{\lambda f}(x\xi+y\eta)}d\xi d\eta\\
+   =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2e^{\frac{ik}{2 f}(x^2+y^2)}
+   \int e^{\frac{ik}{2 f}(\xi^2+\eta^2)} \bigg\{\int U(x',y',0)\\
+   &\times  e^{ \frac{ik}{2f}(x'^2+y'^2)}e^{-\frac{i 2\pi}{\lambda f}(\xi x'+\eta y')}
+     dx' dy'\bigg\} e^{-\frac{i 2\pi}{\lambda f}(x\xi+y\eta)} d\xi d\eta\\
+   =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2e^{\frac{ik}{2 f}(x^2+y^2)}
+   \int U(x',y',0) \\
+   &\times\bigg\{\int   
+   e^{-\frac{i 2\pi}{2 \lambda f}(2x\xi+2y\eta)} 
+   e^{-\frac{i 2\pi}{2 \lambda f}(2\xi x'+2\eta y')} 
+   e^{\frac{i2\pi}{2 \lambda f}(\xi^2+\eta^2)} 
+   e^{ \frac{i2\pi}{2 \lambda f}(x'^2+y'^2)}
+   d\xi d\eta\bigg\} dx' dy'\\
+   =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2
+   \int U(x',y',0) \\
+   &\times\bigg\{\int   
+   e^{\frac{i 2\pi}{2 \lambda f}(\xi^2+\eta^2-2x\xi-2y\eta-2\xi x'-2\eta y'+x'^2+y'^2+x^2+y^2)} 
+   d\xi d\eta\bigg\} dx' dy'\\
+   =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2
+   \int U(x',y',0) \underbrace{\bigg\{\int   
+   e^{\frac{i 2\pi}{2 \lambda f}((\xi-x-x')^2+(\eta-y-y')^2)} 
+   d\xi d\eta\bigg\}}_{i\lambda f}  e^{\frac{i 2\pi}{2 \lambda f}(2x'x-2y'y)}dx' dy'\\
+   =&-\frac{ie^{i4\pi f/\lambda}}{\lambda f}\mathcal{F}[U(x',y',0)]\left(\frac{x}{\lambda f},\frac{y}{\lambda f}\right)
+   \end{aligned}
+\end{equation}
+where we've used completing the square, flipping the order of integration, and evaluated an internal Gaussian integral. The field at the camera is thus the Fourier transform of the field at the SLM, multiplied by a phase factor. We may drop the irrelevant phase factor $e^{i4\pi f/\lambda}$, and the field at the camera is thus  precisely the Fourier transform of the field at the SLM. (see goodman section 6.2.2)
+
+\subsection{with different variables}
+paper: slm plane is $u(x,y,0)$ lens plane is $u(v,w,f)$ and image plane is $u(X,Y,2f)$
+me:  slm plane is $u(x,y,0)$ lens plane is $u(v,w,f)$ and image plane is $u(X,Y,2f)$
+\begin{equation}
+    \begin{aligned}
+    U(X,Y,2f)=&\left(\frac{e^{ikf}}{i\lambda f}\right)e^{\frac{ik}{2 f}(X^2+Y^2)}
+    \int \left[U(v,w,f)
+    \overbrace{\cancel{e^{-\frac{ik}{2f}(v^2+w^2)}}}^{lens
+    }\right]
+    \overbrace{\cancel{e^{ \frac{ik}{2f}(v^2+w^2)}}}^{Fresnel}
+    e^{-\frac{i 2\pi}{\lambda f}(Xv+Yw)}dv dw\\
+    =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2e^{\frac{ik}{2 f}(X^2+Y^2)}
+    \int e^{\frac{ik}{2 f}(v^2+w^2)} \bigg\{\int U(x,y,0)\\
+    &\times  e^{ \frac{ik}{2f}(x^2+y^2)}e^{-\frac{i 2\pi}{\lambda f}(v x+w y)}
+      dx dy\bigg\} e^{-\frac{i 2\pi}{\lambda f}(Xv+Yw)} dv dw\\
+    =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2e^{\frac{ik}{2 f}(X^2+Y^2)}
+    \int U(x,y,0) \\
+    &\times\bigg\{\int   
+    e^{-\frac{i 2\pi}{2 \lambda f}(2Xv+2Yw)} 
+    e^{-\frac{i 2\pi}{2 \lambda f}(2v x+2w y)} 
+    e^{\frac{i2\pi}{2 \lambda f}(v^2+w^2)} 
+    e^{ \frac{i2\pi}{2 \lambda f}(x^2+y^2)}
+    dv dw\bigg\} dx dy\\
+    =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2
+    \int U(x,y,0) \\
+    &\times\bigg\{\int   
+    e^{\frac{i 2\pi}{2 \lambda f}(v^2+w^2-2Xv-2Yw-2v x-2w y+x^2+y^2+X^2+Y^2 +2xX+2yY)}
+    e^{\frac{i 2\pi}{2 \lambda f}(-2xX-2yY)}
+    dv dw\bigg\} dx dy\\
+    =&\left(\frac{e^{ikf}}{i\lambda f}\right)^2
+    \int U(x,y,0) \underbrace{\bigg\{\int   
+    e^{\frac{i 2\pi}{2 \lambda f}((v-X-x)^2+(w-Y-y)^2)} 
+    dv dw\bigg\}}_{i\lambda f}  e^{\frac{-i 2\pi}{2 \lambda f}(2xX+2yY)}dx dy\\
+    =&-\frac{ie^{i4\pi f/\lambda}}{\lambda f}\mathcal{F}[U(x,y,0)]\left(\frac{X}{\lambda f},\frac{Y}{\lambda f}\right)
+    \end{aligned}
+\end{equation}
+\section{an aside about numerical diffraction packages, move elsewhere}
+In learning all this about diffraction, I was motivated in part by the desire to understand the numerical diffraction packages that i have been using. 
+
+The one i'm the most familiar with right now is the LightPipes package for python. this package is based on code going back to at least the early 90's, and therefore may not incorporatte more recent advances in the field. But it is a good place to start, and it has a particularly nice feature where the coordinate system can be transformed from rectilinear to spherical, which lets the grid contract around the focal point of a lens. but its also not quite as fast as i would like. it lso isn't the easiest to use and understand, particularly the coordinate system stuff.
+
+I also found the pyoptica package, which is nice and fast, and well documented down to the level of the math. but it doesn't have the coordinate system stuff, and it doesn't seem to be as well maintained. the lasst commmit was two years ago as of this writing. but the code is very well documented, and it is very fast, though much of that is wastted when propagating to the focus of a lens, becuse the grid isn't adaptive. 
+
+Probably the most impressive package i found was the Diffractio package, which has a lot of features for field in varius dimensions, and its well documented, with plotting features that are very nice. I haven't used it much yet, but i'm excited to try it out, though i haven't come accross the coordinate system stuff yet, which is a bummer. the algorithms references are pretty recent and up to date, which is nice. its possible that some of the methods i haven't tried out yet have the coordinate system stuff, like the CZT method. i looks like it does actually... i have to try this out. 
+
+so i want to answer the question of how thick an optical element with with a given (differential) index of refraction must be to introduce a phase shift of $2\pi$ for light of a certain wavelength $\lambda$. Well, the phase shift is given by
+\begin{equation}
+    \phi=\frac{2\pi}{\lambda}n\Delta L
+\end{equation}
+right? well if $n=2$ the wavelength in the material is $\lambda/2$, so a layer of thickness $\lambda$ will introduce a phase shift of $2\pi$ since it will contain two full wavelengths compared to a wavefront propagating through a vacuum, which will have one wavelength.
+
+
+
+\end{document}

@@ -1,0 +1,91 @@
+\contentsline {chapter}{\numberline {1}Introduction test}{5}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Latex settings}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}latexmkrc}{5}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}settings.json}{6}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Mathematica settings}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Git}{8}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Formulas}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Lande g-factors}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Doppler Broadening (from wikipedia)}{9}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Optical cross-section}{10}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Gaussian beams}{10}{section.2.4}%
+\contentsline {chapter}{\numberline {3}MOTs}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Finite photon recoil dynamics}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Regimes of red-detuned MOT}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Red-detuned MOT Regime (I)}{11}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}regime 2 }{11}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}regime 3}{11}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}other regimes?}{12}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}method}{12}{subsection.3.2.5}%
+\contentsline {chapter}{\numberline {4}Cooling and Trapping atoms with t}{13}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Deceleration of an atom by a single beam}{13}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Optical Molasses}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}The Doppler cooling limit}{16}{subsection.4.2.1}%
+\contentsline {section}{\numberline {4.3}One dimensional magneto-optical trap}{17}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Tables}{17}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Math}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Gaussian integrals}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Green's Theorem}{21}{section.5.2}%
+\contentsline {paragraph}{What are Green's functions? Building up intuition}{22}{section*.6}%
+\contentsline {subsubsection}{Constructing Green's functions for Dirichlet boundary conditions}{23}{section*.7}%
+\contentsline {subsubsection}{Constructing Green's functions for Neumann boundary conditions}{24}{section*.8}%
+\contentsline {section}{\numberline {5.3}trig}{24}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}hyperbolic trig}{24}{subsection.5.3.1}%
+\contentsline {section}{\numberline {5.4}Derivatives}{25}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Derivative of $a^x$}{25}{subsection.5.4.1}%
+\contentsline {chapter}{\numberline {6}Optics1}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}summary}{27}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Diffraction}{27}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Beam Shaping}{28}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Fourier Theory}{28}{subsection.6.2.1}%
+\contentsline {paragraph}{Parseval's Theorem}{28}{section*.9}%
+\contentsline {paragraph}{Convolution Theorem}{29}{section*.10}%
+\contentsline {paragraph}{Transforms of derivatives}{29}{section*.11}%
+\contentsline {paragraph}{Cauchy-Schwarz Inequality}{29}{section*.12}%
+\contentsline {subsection}{\numberline {6.2.2}Uncertainty principle and Space-Bandwidth Product}{29}{subsection.6.2.2}%
+\contentsline {paragraph}{Gaussian's minimize the space-bandwidth product}{29}{section*.13}%
+\contentsline {paragraph}{Theorem of minimization}{30}{section*.14}%
+\contentsline {subsection}{\numberline {6.2.3}Cylindrical symmetry and Hankel transforms}{30}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Stationary Phase}{30}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}convergence of the stationary phase approximation}{31}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}Maxwell's equations}{31}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Geometrical optics}{31}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}The eikonal equation}{32}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}The eikonal equation and Maxwell's equations}{32}{subsection.6.5.2}%
+\contentsline {section}{\numberline {6.6}Fourier Optics 1}{33}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Fresnel diffraction introduction}{33}{subsection.6.6.1}%
+\contentsline {chapter}{\numberline {7}Optics2}{35}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Fourier optics Born and Wolf chapter 8 }{35}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}The Huygens-Fresnel principle}{35}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}The Kirchhoff diffraction theory}{37}{subsection.7.1.2}%
+\contentsline {subsubsection}{The Kirchhoff integral theorem}{37}{section*.15}%
+\contentsline {subsubsection}{Kirchoff's diffraction theory}{37}{section*.16}%
+\contentsline {subsection}{\numberline {7.1.3}Kirchoff theory: Fraunhofer and Fresnel diffraction}{38}{subsection.7.1.3}%
+\contentsline {subsubsection}{Initial approximations}{38}{section*.17}%
+\contentsline {subsubsection}{The Fraunhofer and Fresnel approximations}{39}{section*.18}%
+\contentsline {subsection}{\numberline {7.1.4}Fraunhofer diffraction}{40}{subsection.7.1.4}%
+\contentsline {chapter}{\numberline {8}Fourier Optics, following Goodman}{41}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Introduction and chapter 2}{41}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Fourier 2d}{41}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}theorem and identities}{42}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Local spatial frequency}{43}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}chapter 2 }{43}{subsection.8.1.4}%
+\contentsline {section}{\numberline {8.2}chapter 3, Scalar diffraction theory}{44}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}3.5 The Rayliegh Sommerfeld diffraction theory}{44}{subsection.8.2.1}%
+\contentsline {subsubsection}{Rayliegh-Sommerfeld diffraction formula}{45}{section*.19}%
+\contentsline {subsection}{\numberline {8.2.2}3.6 Kirchoff vs Sommerfeld}{45}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}3.7 Furthur discussion of the Huygens Fresnel principle}{46}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Goodman Chapter 4, Fresnel and Fraunhofer}{46}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Goodman 4.1.2, starting point before Fresnel}{46}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Goodman 4.2, The Fresnel Approximation}{47}{subsection.8.3.2}%
+\contentsline {subsubsection}{Goodman 4.2.1, Postive and negative Phases}{47}{section*.20}%
+\contentsline {subsubsection}{Goodman 4.2.2 and 4.2.3, Accuracy of the Fresnel Approximtion}{47}{section*.21}%
+\contentsline {subsubsection}{Goodman 4.2.4 through 4.2.6}{48}{section*.22}%
+\contentsline {subsection}{\numberline {8.3.3}Goodman 4.3 the Fraunhofer Approximation}{48}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Thin lens as a Fourier Transformer}{48}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}with different variables}{50}{subsection.8.4.1}%
+\contentsline {section}{\numberline {8.5}an aside about numerical diffraction packages, move elsewhere}{50}{section.8.5}%
+\contentsline {chapter}{\numberline {9}Camera Calibration}{53}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Camera calibration}{53}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Additional factors}{54}{subsection.9.1.1}%
+\contentsline {chapter}{\numberline {10}Books}{55}{chapter.10}%

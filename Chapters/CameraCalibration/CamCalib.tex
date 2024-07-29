@@ -1,0 +1,48 @@
+\documentclass[../../main.tex]{subfiles} % Use the main document's preamble
+
+\begin{document}
+\chapter{Camera Calibration} 
+\section{Camera calibration}
+We would like to know how many atoms we have from a picture of them. this will depend on knowing how many photons we have for a given camera signal. This will depend on varius settings of the camera potentially. 
+
+We are currently using cameras from Flir, where this page is helpful in outlined the terms and definitions: https://www.flir.com/discover/iis/machine-vision/how-to-evaluate-camera-sensitivity/
+
+We begin with the photon hitting a sensor. The photon may be converted to an electron, which is stored in the `Well'. The number of electrons in the Well is then amplified with some Gain (which may be unity) and then the resulting signal is sent to the ADC where it is translated into some digital number. That is then saved to the computer.That's a high-level overview, but the devil is in the details. 
+
+Let's consider an image taken with exposure time $t_{exp}$. Let's begin by assuming we have $N_\gamma$ photons incident upon our sensor during the exposure time. The probability that this photon will contribute an electron to the Well is called the Quantum Efficiency (QE). The value of the QE is generally wavelength dependent, and varies from detector to detector; let's denote the QE by the symbol $Q_{eff}$. However, due to thermal energy in the electronic there will also bea slow buildup of thermal electrons in the well, and these are indistinguishable from the photoelectrons. The rate at which these build up we shall denote $I_d(T)$ which has units of e$^-$/s. The dark current typically is negligible for short exposure times (as for us), and can be ameliorated via cooling the sensor. Therefore, after the exposure the Well has a number of electrons:
+\begin{equation}
+    N_{well\ e^-}=Q_{eff}N_{\gamma}+I_d(T)t_{exp}
+\end{equation}
+
+However, the Well can only hold a limited number of electrons, called the well depth $D_{e^-}$. If this amount is exceded the pixel will be saturated. In CCD cameras the well can overflow to neighboring pixels, and effect called blooming. The electrons in the well are an analog signal, and it is at this point that the application of the camera's amplifying gain may be be applied to the signal. The gain of an electronic signal is given by 
+\begin{equation}
+    Gain=10\log_{10}\frac{P_{out}}{P_{in}}
+\end{equation}
+and has units of dB. When the input and output impedances are the same, we can expressed the voltage gain $G_V$ as 
+\begin{equation}
+    G_V=20\log_{10}\frac{V_{out}}{V_{in}}
+\end{equation}
+and so we immediatly see
+\begin{equation}
+    V_{out}=V_{in}10^{V_{G}/20}.
+\end{equation}
+The electrons in the Well are simply analog voltages, and are amplified in the same way. The resulting quantity of electrons is then fed to the ADC, where the electrons are converted to Analog-Digital Units (ADU), also often called ``counts''. This is the unit that is ultimately stored in the TIFF file. The process of reading out the analog signal will introduce noise, called the read noise. The read noise is generally given in units of electrons, and we shall denote it by $R_{e^-}$. The total number of counts in the image is then given by
+\begin{equation}
+    N_{counts}=G_VN_{well\ e^-}+R_{e^-}=G_V(Q_{eff}N_{\gamma}+I_d(T)t_{exp})+R_{e^-}.
+\end{equation}
+The conversion from electrons to counts is called the gain, and is given in units of counts per electron. This is a different gain from the amplification gain, and we shall denote it by $G_{ADU}$. The gain is generally a constant for a given camera, but can be changed in the camera settings sometimes. The gain is generally given in units of counts per electron or the inverse, but is really a conversation factor, not an actual gain. 
+
+At this point, one final amplification of the signal can occur, called digital gain, which is simply a multiplication of the counts by a constant. This is generally done in the camera settings, and is generally not recommended as it will amplify the read noise as well. its not real gain, and is really more an interolation and upscaling of the counts.
+
+\subsection{Additional factors}
+There are other factors and processes which may occur in the image taking process. (has the lower limit been an issue? unlikely). The Flir cameras have a gamma setting, which seems to be intended to make the image look better to the human eye. This is a non-linear transformation of the counts, and so will affect the number of counts in the image. The default value for the gamma setting in the Flir cameras seems to be 0.8, but this can be changed or disabled. I'm not certain, but i think that the gamma setting is applied prior to the ADC?
+
+Another factor is the image offset, or black level. This is a constant offset added to the signal both before and after the ADC. This is generally done to remove the read noise from the image, and is generally a small number of counts.
+
+\begin{equation}
+    P_{out}=P_{max}\left(\frac{P_{in}}{P_{max}}\right)^\gamma 
+\end{equation}
+
+
+
+\end{document}

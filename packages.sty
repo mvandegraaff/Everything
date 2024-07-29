@@ -1,0 +1,98 @@
+% Geometry and formatting
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{multicol}
+\usepackage{mdframed}
+\usepackage{lipsum}
+\usepackage{bookmark}
+\usepackage{microtype} % Improves typography
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{siunitx}
+\usepackage{bm}
+%\usepackage{bbold} % sans serif \mathbb
+%\usepackage{txfonts}
+%\usepackage{amsfonts}
+%\usepackage{unicode-math} % broken
+\usepackage{dsfont}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{centernot}
+
+% For better tables
+\usepackage{booktabs}
+
+% List customization
+\usepackage{enumitem}
+
+% Hyperlinks
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+% Code listings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+
+% For adding notes
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+% Space management after commands
+\usepackage{xspace}
+
+% New definition of square root %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% It renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% It defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+  \setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+  \advance\dimen0-0.2\ht0
+  \setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+  {\box0\lower0.4pt\box2}
+}
+
+% Math font size adjustments
+% \DeclareMathSizes{display size}{text size}{script size}{scriptscript size}
+% \DeclareMathSizes{10.95}{12}{12}{7}    
+% \DeclareMathSizes{12}{12}{12}{7} 
+% \DeclareMathSizes{14}{12}{7}{7}
+% \DeclareMathSizes{10}{12}{7}{7}
+
+
+% Definition of lambdabar %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\newcommand{\lambdabar}{{\mathchoice
+      {\smash@bar\textfont\displaystyle{0.25}{1.2}\lambda}
+      {\smash@bar\textfont\textstyle{0.25}{1.2}\lambda}
+      {\smash@bar\scriptfont\scriptstyle{0.25}{1.2}\lambda}
+      {\smash@bar\scriptscriptfont\scriptscriptstyle{0.25}{1.2}\lambda}
+    }}
+\newcommand{\smash@bar}[4]{%
+  \smash{\rlap{\raisebox{-#3\fontdimen5#10}{$\m@th#2\mkern#4mu\mathchar'26$}}}%
+}
+\makeatother
+
+% Set notation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\R}{\mathbb{R}}     % Reals
+\newcommand{\integers}{\mathbb{Z}} % Integers
+
+% Aside environment %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{aside}
+{\begin{mdframed}[
+      leftline=false,rightline=false,leftmargin=2em,rightmargin=2em,
+      innerleftmargin=0pt,innerrightmargin=0pt,linewidth=0.75pt,
+      skipabove=7pt,skipbelow=7pt]\small}
+    {\end{mdframed}}
+
+% Sign operator
+\DeclareMathOperator{\sgn}{sgn}
+
+% Notes management
+\newcommand{\note}[1]{\todo[inline]{#1}}
