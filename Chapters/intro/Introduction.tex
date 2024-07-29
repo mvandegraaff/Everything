@@ -11,6 +11,8 @@ Latex is a pain to use sometimes. Currently, with the setup i have, i have to do
 The main.tex file typically compiles fine, but the subfiles don't compile correctly after compiling the main file unless you do the following. (1) compile main file (ctrl-s will build automatically), (2) go to subfile and change the path from \verb|\document class[../../main.tex]| to \verb|\document class[../main.tex]{subfiles}|, the sub file will build and send output to a weird spot, and i think through an error, that's fine. (3) change the path back to \verb|\documentclass[../../main.tex]| and the subfile will build correctly, with its pdf in the same folder as the subfile.tex. 
 
 This should be fixable, but i haven't figured it out yet.
+
+Update, on july 29 2024 that stopped working for some reason. On a whim i decided to copy the project into overleaf and try it, and it just worked, so i'm going to switch to Overleaf, which is probably better in most ways except it's offline access. honestly though, im at the point where i need constant internet for so much anyway, that findng a case where that's gonna be the issue is hopefully not gonna come up much. 
 \subsection{latexmkrc}
 the following is the content of the \texttt{.latexmkrc} file (as of 6/26/2024):
 \begin{lstlisting}
@@ -144,9 +146,21 @@ Another fun fact, ifasdfa
 
 \section{Git}
 you can use the following command to remove the specific safe directory directly from the terminal: 
-% \begin{verbatim}
-%     git config --global --unset safe.directory "//srsrv1/lab/home/Vandy/Latex/EverythingTwo"
+\begin{verbatim}
+    git config --global --unset safe.directory "//srsrv1/lab/home/Vandy/Latex/EverythingTwo"
+\end{verbatim}
+To initialize a repo in an existing folder and link it to a remote repo do
+\begin{verbatim}
+    cd path/to/your/folder
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git remote add origin 
+    https://github.com/username/repository.git 
+    or git@github.com:username/repository.git
+    git push -u origin master
+\end{verbatim}
+If SSH is being used, use the git@ version, (and note the semicolon after .com)
 
-% \end{verbatim}
 
 \end{document}
